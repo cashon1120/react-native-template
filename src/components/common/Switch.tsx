@@ -10,6 +10,7 @@ import {PRIMARY_COLOR} from '@/globalStyle';
 interface Props {
   onChange: (value: boolean) => void;
   value: boolean;
+  disabled?: boolean;
   activeColor?: string;
   size?: 'default' | 'small';
 }
@@ -19,6 +20,7 @@ const Switch = (props: Props) => {
     size = 'default',
     activeColor = PRIMARY_COLOR,
     value,
+    disabled,
     onChange,
   } = props;
   const getValue = (): number => {
@@ -45,12 +47,13 @@ const Switch = (props: Props) => {
   }, [value]);
 
   return (
-    <TouchableWithoutFeedback onPress={handleToggleValue}>
+    <TouchableWithoutFeedback onPress={handleToggleValue} disabled={disabled}>
       <View
         style={[
           styles.wrapper,
           styles[size],
           {backgroundColor: value ? activeColor : '#ddd'},
+          {opacity: disabled ? 0.6 : 1},
         ]}>
         <Animated.View
           style={[

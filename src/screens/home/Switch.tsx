@@ -30,6 +30,13 @@ const SwitchDemo = () => {
           activeColor="#1bc4a2"
           onChange={(value: boolean) => setColorChecked(value)}
         />
+        <View style={{height: 15}} />
+        <Text>disabled: true</Text>
+        <Switch
+          value={true}
+          disabled
+          onChange={(value: boolean) => setColorChecked(value)}
+        />
       </View>
     </>
   );
