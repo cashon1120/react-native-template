@@ -14,6 +14,7 @@ export type RootStackParamList = {
   SpinningDemo: undefined;
 
   Setting: undefined;
+  BottomSheetDemo: undefined;
 };
 
 export type BottomTabParamList = {

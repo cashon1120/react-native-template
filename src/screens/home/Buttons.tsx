@@ -11,7 +11,7 @@ import {
 const Buttons = () => {
   return (
     <FullScreenWrapper>
-      <Header text="按钮" />
+      <Header text="Button" />
       <FullScreenMain>
         <ScrollView>
           <View style={{padding: 15}}>

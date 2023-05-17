@@ -8,6 +8,7 @@ import ReportDetail from '@/screens/report/Detail';
 import Toasts from '@/screens/home/Toasts';
 import Tabs from '@/screens/home/Tabs';
 import SpinningDemo from '@/screens/home/Spinning';
+import BottomSheetDemo from '@/screens/home/BottomSheet';
 import Setting from '@/screens/user/Setting';
 
 export interface Route {
@@ -24,6 +25,7 @@ const routes: Route[] = [
   {name: 'Toasts', component: Toasts},
   {name: 'Tabs', component: Tabs},
   {name: 'SpinningDemo', component: SpinningDemo},
+  {name: 'BottomSheetDemo', component: BottomSheetDemo},
 
   {name: 'Setting', component: Setting},
 ];

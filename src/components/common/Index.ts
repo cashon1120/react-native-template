@@ -12,6 +12,8 @@ import SafeBottom from './SafeBottom';
 import FullScreenWrapper, {FullScreenMain} from './FullScreenWrapper';
 import Tabs from './Tabs';
 import Spinning from './Spinning';
+import Mask from './Mask';
+import BottomSheet from './BottomSheet';
 
 export {
   FlatList,
@@ -29,4 +31,6 @@ export {
   FullScreenMain,
   Tabs,
   Spinning,
+  BottomSheet,
+  Mask,
 };

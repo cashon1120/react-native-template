@@ -6,10 +6,11 @@ const Index = () => {
   return (
     <>
       <Header text="首页" disableBack />
-      <ListItem label="按钮" to="Buttons" />
+      <ListItem label="Button" to="Buttons" />
       <ListItem label="Toast" to="Toasts" />
       <ListItem label="Tabs" to="Tabs" />
       <ListItem label="Spinning" to="SpinningDemo" />
+      <ListItem label="BottomSheet" to="BottomSheetDemo" />
       <Link to="ReportDetail">
         <Text style={{padding: 15}}>Link组件, 跳转页面</Text>
       </Link>
