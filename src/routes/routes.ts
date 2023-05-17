@@ -1,6 +1,6 @@
 import BottomTabNavigator from './BottomTabNavigator';
 import {RootStackParamList} from './types';
-import WorkDetail from '../screens/work/Detail';
+import WorkDetail from '../screens/home/Detail';
 import ReportDetail from '../screens/report/Detail';
 
 export interface Route {

@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "create-img-types": "node createImageTypes.js",
+    "create-img-types": "node ./buildTools/createImageTypes.js",
     "env:dev": "node ./buildTools/setEnv.js development",
     "env:prod": "node ./buildTools/setEnv.js production",
     "build-version": "node ./buildTools/setVersion.js",

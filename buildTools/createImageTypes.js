@@ -19,10 +19,8 @@ Images = Images.replace(/"/g, "'");
 
 interfaceStr = JSON.stringify(interfaceStr, null, '\t');
 interfaceStr = interfaceStr.replace(/:\s"/g, ': ');
-interfaceStr = interfaceStr.replace(
-  /ImageSourcePropType"/g,
-  'ImageSourcePropType',
-);
+interfaceStr = interfaceStr.replace(/,/g, ';');
+interfaceStr = interfaceStr.replace(/"/g, '');
 
-const string = `import {ImageSourcePropType} from 'react-native'\nexport interface ImagesProps${interfaceStr}\nconst Images: ImagesProps = ${Images} \nexport default Images`;
+const string = `import {ImageSourcePropType} from 'react-native';\nexport interface ImagesProps${interfaceStr}\nconst Images: ImagesProps = ${Images} \nexport default Images`;
 fs.writeFileSync('./src/assets/Images.ts', string);

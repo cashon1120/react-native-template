@@ -29,24 +29,15 @@ const BarIcon = (props: any) => {
         <Icon
           width={41}
           height={37}
-          name={focused ? 'tab_nor01' : 'tab_sel01'}
+          name={focused ? 'tab_01_active' : 'tab_01'}
         />
       );
       break;
     case 'User':
-      icon = <Icon name={focused ? 'tab_nor02' : 'tab_sel02'} />;
+      icon = <Icon name={focused ? 'tab_02_active' : 'tab_02'} />;
       break;
     case 'Report':
-      icon = <Icon name={focused ? 'tab_nor03' : 'tab_sel03'} />;
-      break;
-    case 'Shop':
-      icon = (
-        <Icon
-          width={42}
-          height={42}
-          name={focused ? 'tab_nor04' : 'tab_sel04'}
-        />
-      );
+      icon = <Icon name={focused ? 'tab_03_active' : 'tab_03'} />;
       break;
     default:
       break;

@@ -5,7 +5,7 @@ import {ToastAndroid, BackHandler} from 'react-native';
 import {useAndroidBackHandler} from 'react-navigation-backhandler';
 import {BottomTabParamList} from './types';
 import BarIcon from './icon';
-import Work from '../screens/work/Index';
+import Work from '../screens/home/Index';
 import Report from '../screens/report/Index';
 import User from '../screens/user/Index';
 
@@ -18,7 +18,7 @@ export default function BottomTabNavigator() {
       BackHandler.exitApp();
     } else {
       lastBackPressed = Date.now();
-      ToastAndroid.show('再按一次退出萌熊乐园', 1000);
+      ToastAndroid.show('再按一次退出应用', 1000);
     }
     return true;
   });
@@ -39,7 +39,7 @@ export default function BottomTabNavigator() {
         name="Work"
         component={Work}
         options={{
-          title: '工作',
+          title: '首页',
         }}
       />
       <BottomTab.Screen
