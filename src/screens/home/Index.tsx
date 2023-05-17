@@ -9,6 +9,7 @@ const Index = () => {
       <ListItem label="按钮" to="Buttons" />
       <ListItem label="Toast" to="Toasts" />
       <ListItem label="Tabs" to="Tabs" />
+      <ListItem label="Spinning" to="SpinningDemo" />
       <Link to="ReportDetail">
         <Text style={{padding: 15}}>Link组件, 跳转页面</Text>
       </Link>

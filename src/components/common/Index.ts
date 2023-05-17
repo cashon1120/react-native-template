@@ -11,6 +11,7 @@ import Toast from './Toast';
 import SafeBottom from './SafeBottom';
 import FullScreenWrapper, {FullScreenMain} from './FullScreenWrapper';
 import Tabs from './Tabs';
+import Spinning from './Spinning';
 
 export {
   FlatList,
@@ -27,4 +28,5 @@ export {
   FullScreenWrapper,
   FullScreenMain,
   Tabs,
+  Spinning,
 };

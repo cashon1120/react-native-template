@@ -10,6 +10,7 @@ export type RootStackParamList = {
   Buttons: undefined;
   Toasts: undefined;
   Tabs: undefined;
+  SpinningDemo: undefined;
 };
 
 export type BottomTabParamList = {
