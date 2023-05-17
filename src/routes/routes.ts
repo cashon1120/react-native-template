@@ -11,6 +11,7 @@ import SpinningDemo from '@/screens/home/Spinning';
 import BottomSheetDemo from '@/screens/home/BottomSheet';
 import OverlayDemo from '@/screens/home/Overlay';
 import Setting from '@/screens/user/Setting';
+import SwitchDemo from '@/screens/home/Switch';
 
 export interface Route {
   name: keyof RootStackParamList;
@@ -28,6 +29,7 @@ const routes: Route[] = [
   {name: 'SpinningDemo', component: SpinningDemo},
   {name: 'BottomSheetDemo', component: BottomSheetDemo},
   {name: 'OverlayDemo', component: OverlayDemo},
+  {name: 'SwitchDemo', component: SwitchDemo},
 
   {name: 'Setting', component: Setting},
 ];

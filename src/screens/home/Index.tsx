@@ -12,6 +12,7 @@ const Index = () => {
       <ListItem label="Spinning" to="SpinningDemo" />
       <ListItem label="BottomSheet" to="BottomSheetDemo" />
       <ListItem label="Overlay" to="OverlayDemo" />
+      <ListItem label="Switch" to="SwitchDemo" />
       <Link to="ReportDetail">
         <Text style={{padding: 15}}>Link组件, 跳转页面</Text>
       </Link>

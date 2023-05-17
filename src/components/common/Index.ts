@@ -15,6 +15,7 @@ import Spinning from './Spinning';
 import Mask from './Mask';
 import BottomSheet from './BottomSheet';
 import Overlay from './Overlay';
+import Switch from './Switch';
 
 export {
   FlatList,
@@ -35,4 +36,5 @@ export {
   BottomSheet,
   Mask,
   Overlay,
+  Switch,
 };

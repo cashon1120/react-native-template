@@ -12,7 +12,7 @@ export type RootStackParamList = {
   Toasts: undefined;
   Tabs: undefined;
   SpinningDemo: undefined;
-
+  SwitchDemo: undefined;
   Setting: undefined;
   BottomSheetDemo: undefined;
   OverlayDemo: undefined;
