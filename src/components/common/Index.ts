@@ -10,6 +10,7 @@ import Text from './Text';
 import Toast from './Toast';
 import SafeBottom from './SafeBottom';
 import FullScreenWrapper, {FullScreenMain} from './FullScreenWrapper';
+import Tabs from './Tabs';
 
 export {
   FlatList,
@@ -25,4 +26,5 @@ export {
   SafeBottom,
   FullScreenWrapper,
   FullScreenMain,
+  Tabs,
 };

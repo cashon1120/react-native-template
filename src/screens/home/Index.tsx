@@ -8,8 +8,9 @@ const Index = () => {
       <Header text="首页" disableBack />
       <ListItem label="按钮" to="Buttons" />
       <ListItem label="Toast" to="Toasts" />
+      <ListItem label="Tabs" to="Tabs" />
       <Link to="ReportDetail">
-        <Text style={{padding: 15}}>导航</Text>
+        <Text style={{padding: 15}}>Link组件, 跳转页面</Text>
       </Link>
     </>
   );

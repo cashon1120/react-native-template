@@ -4,6 +4,7 @@ import WorkDetail from '../screens/home/Detail';
 import Buttons from '@/screens/home/Buttons';
 import ReportDetail from '../screens/report/Detail';
 import Toasts from '@/screens/home/Toasts';
+import Tabs from '@/screens/home/Tabs';
 
 export interface Route {
   name: keyof RootStackParamList;
@@ -16,6 +17,7 @@ const routes: Route[] = [
   {name: 'ReportDetail', component: ReportDetail},
   {name: 'Buttons', component: Buttons},
   {name: 'Toasts', component: Toasts},
+  {name: 'Tabs', component: Tabs},
 ];
 
 export default routes;
