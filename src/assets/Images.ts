@@ -2,10 +2,10 @@ import {ImageSourcePropType} from 'react-native';
 export interface ImagesProps {
   arrow: ImageSourcePropType;
   avatar: ImageSourcePropType;
-  back: ImageSourcePropType;
   back_black: ImageSourcePropType;
+  back_white: ImageSourcePropType;
+  no_data: ImageSourcePropType;
   no_img: ImageSourcePropType;
-  nodata: ImageSourcePropType;
   tab_01: ImageSourcePropType;
   tab_01_active: ImageSourcePropType;
   tab_02: ImageSourcePropType;
@@ -16,10 +16,10 @@ export interface ImagesProps {
 const Images: ImagesProps = {
   arrow: require('./arrow.png'),
   avatar: require('./avatar.png'),
-  back: require('./back.png'),
   back_black: require('./back_black.png'),
+  back_white: require('./back_white.png'),
+  no_data: require('./no_data.png'),
   no_img: require('./no_img.png'),
-  nodata: require('./nodata.png'),
   tab_01: require('./tab_01.png'),
   tab_01_active: require('./tab_01_active.png'),
   tab_02: require('./tab_02.png'),

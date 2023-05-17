@@ -13,7 +13,7 @@ const NoData = (props: IProps) => {
         <Image
           style={styles.icon}
           resizeMode="cover"
-          name="nodata"
+          name="no_data"
           width={100}
           height={100}
         />

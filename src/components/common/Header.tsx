@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
   View,
@@ -14,7 +13,7 @@ import {useStore} from '@/models/global';
 import Image from '@/components/common/Image';
 import StatusBar, {BarStypeProps} from '@/components/common/StatusBar';
 import Text from '@/components/common/Text';
-import globalStyle from '@/globalStyle';
+import globalStyle, {PRIMARY_COLOR} from '@/globalStyle';
 
 type BackStyle = Partial<{
   [key in BarStypeProps]: ViewStyle | TextStyle;
@@ -46,7 +45,7 @@ const Header = (props: IProps) => {
     rightText,
     rightTextEvent,
     backEvent,
-    backgroundColor,
+    backgroundColor = PRIMARY_COLOR,
     barStyle,
     disableBack,
     rightElement,
@@ -63,7 +62,7 @@ const Header = (props: IProps) => {
     }
     backEvent ? backEvent() : navigation?.goBack();
   };
-  const backUrl = barStyle === 'dark-content' ? 'back_black' : 'back';
+  const backUrl = barStyle === 'dark-content' ? 'back_black' : 'back_white';
   return (
     <View
       style={{
@@ -71,7 +70,7 @@ const Header = (props: IProps) => {
         zIndex: 888,
         paddingTop: store.barHeight,
         height: store.barHeight + 48,
-        backgroundColor: backgroundColor || '#466CF5',
+        backgroundColor: backgroundColor,
         ...styles[barStyle ? barStyle : ''],
       }}
       onLayout={handleLayout}>

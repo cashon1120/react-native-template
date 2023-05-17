@@ -1,5 +1,7 @@
 import {StyleSheet} from 'react-native';
 
+export const PRIMARY_COLOR = '#466CF5';
+
 const globalStyle = StyleSheet.create({
   // 常用字体大小和颜色
   font_size_12: {
@@ -23,6 +25,9 @@ const globalStyle = StyleSheet.create({
   font_size_24: {
     fontSize: 24,
   },
+  font_color_white: {
+    color: '#fff',
+  },
   font_color_3: {
     color: '#333',
   },
@@ -37,6 +42,9 @@ const globalStyle = StyleSheet.create({
   },
   font_color_9: {
     color: '#999',
+  },
+  font_color_primary: {
+    color: PRIMARY_COLOR,
   },
 
   // 内容水平垂直居中

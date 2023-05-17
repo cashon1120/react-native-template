@@ -24,7 +24,7 @@ const BarIcon = (props: any) => {
   } = props;
   let icon = <></>;
   switch (name) {
-    case 'Work':
+    case 'Home':
       icon = (
         <Icon
           width={41}

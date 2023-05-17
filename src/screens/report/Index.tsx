@@ -1,19 +1,10 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
-import useNavigation from '@/hooks/useNavigation';
-import {Text} from 'react-native';
+import {Header} from '@/components/common/Index';
 
 const Index = () => {
-  const navigation = useNavigation();
   return (
     <>
-      <Text>home</Text>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('ReportDetail');
-        }}>
-        <Text>to detail</Text>
-      </TouchableOpacity>
+      <Header text="统计" disableBack />
     </>
   );
 };

@@ -25,7 +25,7 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Work"
+      initialRouteName="Home"
       screenOptions={({route}) => ({
         tabBarIcon: options => <BarIcon route={route} options={options} />,
         header: () => <></>,
@@ -36,7 +36,7 @@ export default function BottomTabNavigator() {
         },
       })}>
       <BottomTab.Screen
-        name="Work"
+        name="Home"
         component={Work}
         options={{
           title: '首页',
