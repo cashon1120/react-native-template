@@ -6,7 +6,7 @@ const Index = () => {
   return (
     <>
       <Header text="首页" disableBack />
-      <ListItem label="按钮" to="WorkDetail" />
+      <ListItem label="按钮" to="Buttons" />
       <ListItem
         label="Toast"
         onPress={() => {

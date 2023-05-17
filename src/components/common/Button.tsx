@@ -7,16 +7,20 @@ import {
   GestureResponderEvent,
 } from 'react-native';
 import Text from '@/components/common/Text';
-// 主色调
-const PRIMARY_COLOR = '#466CF5';
+import {PRIMARY_COLOR} from '@/globalStyle';
+
+// 配置颜色
+const DANGER_COLOR = '#F35713';
+const SAFE_COLOR = '#47d382';
 
 type ButtonType =
   | 'primary'
   | 'default'
   | 'primary-line'
-  | 'red-line'
-  | 'red'
-  | 'green';
+  | 'danger'
+  | 'danger-line'
+  | 'safe'
+  | 'safe-line';
 type ButtonSize = 'large' | 'middle' | 'small' | 'mini-small';
 
 /**
@@ -60,7 +64,7 @@ const Button = (props: IProps) => {
     title,
     disabled,
     size = 'middle',
-    type,
+    type = 'default',
     loading,
     loadingText = '加载中',
     radius,
@@ -70,7 +74,7 @@ const Button = (props: IProps) => {
       onPress={onPress}
       style={{borderRadius: radius ? 20 : 5}}
       disabled={disabled}
-      activeOpacity={0.7}>
+      activeOpacity={0.8}>
       <View>
         <Text
           style={[
@@ -115,19 +119,25 @@ const styles: Style = StyleSheet.create({
     borderColor: PRIMARY_COLOR,
     color: PRIMARY_COLOR,
   },
-  'red-line': {
+  danger: {
+    backgroundColor: DANGER_COLOR,
+    color: '#fff',
+  },
+  'danger-line': {
     backgroundColor: '#fff',
     borderWidth: 1,
-    borderColor: '#F35713',
-    color: '#F35713',
+    borderColor: DANGER_COLOR,
+    color: DANGER_COLOR,
   },
-  red: {
-    backgroundColor: '#ff6363',
+  safe: {
+    backgroundColor: SAFE_COLOR,
     color: '#fff',
   },
-  green: {
-    backgroundColor: '#47d382',
-    color: '#fff',
+  'safe-line': {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: SAFE_COLOR,
+    color: SAFE_COLOR,
   },
   raidusWrapper: {
     borderRadius: 20,
