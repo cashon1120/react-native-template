@@ -132,7 +132,7 @@ const styles: Style = StyleSheet.create({
   default: {
     backgroundColor: '#fff',
     color: '#333',
-    borderColor: '#eee',
+    borderColor: '#ddd',
     borderWidth: 1,
   },
   'text-default': {color: '#333'},
