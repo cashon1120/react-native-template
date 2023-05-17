@@ -8,8 +8,8 @@ const Toasts = () => {
       <Header text="Toast" />
       <View style={{padding: 15}}>
         <Button
-          title="top & delay: 3000(default: 2000)"
-          onPress={() => Toast.show('top', {position: 'top', delay: 3000})}
+          title="top"
+          onPress={() => Toast.show('top', {position: 'top'})}
         />
         <View style={{height: 15}} />
         <Button
@@ -20,6 +20,13 @@ const Toasts = () => {
         <Button
           title="bottom"
           onPress={() => Toast.show('bottom', {position: 'bottom'})}
+        />
+        <View style={{height: 15}} />
+        <Button
+          title="delay: 3000(default: 2000)"
+          onPress={() =>
+            Toast.show('center', {position: 'center', delay: 3000})
+          }
         />
       </View>
     </>
