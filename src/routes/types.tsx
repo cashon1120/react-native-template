@@ -15,6 +15,7 @@ export type RootStackParamList = {
 
   Setting: undefined;
   BottomSheetDemo: undefined;
+  OverlayDemo: undefined;
 };
 
 export type BottomTabParamList = {

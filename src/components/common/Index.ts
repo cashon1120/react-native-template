@@ -14,6 +14,7 @@ import Tabs from './Tabs';
 import Spinning from './Spinning';
 import Mask from './Mask';
 import BottomSheet from './BottomSheet';
+import Overlay from './Overlay';
 
 export {
   FlatList,
@@ -33,4 +34,5 @@ export {
   Spinning,
   BottomSheet,
   Mask,
+  Overlay,
 };

@@ -9,6 +9,7 @@ import Toasts from '@/screens/home/Toasts';
 import Tabs from '@/screens/home/Tabs';
 import SpinningDemo from '@/screens/home/Spinning';
 import BottomSheetDemo from '@/screens/home/BottomSheet';
+import OverlayDemo from '@/screens/home/Overlay';
 import Setting from '@/screens/user/Setting';
 
 export interface Route {
@@ -26,6 +27,7 @@ const routes: Route[] = [
   {name: 'Tabs', component: Tabs},
   {name: 'SpinningDemo', component: SpinningDemo},
   {name: 'BottomSheetDemo', component: BottomSheetDemo},
+  {name: 'OverlayDemo', component: OverlayDemo},
 
   {name: 'Setting', component: Setting},
 ];

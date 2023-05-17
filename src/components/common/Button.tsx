@@ -75,7 +75,7 @@ const Button = (props: IProps) => {
       onPress={onPress}
       style={[{borderRadius: radius ? 20 : 5}]}
       disabled={disabled}
-      activeOpacity={0.8}>
+      activeOpacity={0.7}>
       <View
         style={[
           styles.wrapper,
