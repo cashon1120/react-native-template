@@ -4,7 +4,7 @@ import RootSiblings from 'react-native-root-siblings';
 
 interface Params {
   position: 'top' | 'center' | 'bottom';
-  duration?: number;
+  delay?: number;
 }
 
 const Toast = {
@@ -21,7 +21,7 @@ const Toast = {
     );
     setTimeout(() => {
       ele.destroy();
-    }, params?.duration || 2000);
+    }, params?.delay || 2000);
   },
 };
 
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   top: {top: '15%'},
   center: {top: '48%'},
-  bottom: {bottom: '10%'},
+  bottom: {bottom: '5%'},
   textWrapper: {
     backgroundColor: '#000',
     borderRadius: 3,
