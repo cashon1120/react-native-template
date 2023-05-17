@@ -4,6 +4,7 @@ import RootSiblings from 'react-native-root-siblings';
 
 interface Params {
   position: 'top' | 'center' | 'bottom';
+  duration?: number;
 }
 
 const Toast = {
@@ -20,7 +21,7 @@ const Toast = {
     );
     setTimeout(() => {
       ele.destroy();
-    }, 2000);
+    }, params?.duration || 2000);
   },
 };
 

@@ -6,38 +6,65 @@ import {
   TouchableHighlight,
   Platform,
 } from 'react-native';
+import useNavigation from '@/hooks/useNavigation';
+import {RootStackParamList} from '@/routes/types';
+
 import Image from './Image';
 
-interface IProps {
+/**
+ * @interface Props
+ * @property label 左侧文本
+ * @property icon 左侧图标
+ * @property info 右侧文本内容
+ * @property additionalInfo 附加文本
+ * @property showRedDot 是否显示右侧小红圆点
+ * @property placeholder 右侧默认文本
+ * @property to 要跳转的页面地址
+ * @property params 跳转参数
+ * @property underlayColor 点击背景色
+ * @property hideLine 是否隐藏底部线条
+ */
+
+interface Props {
   label: string;
   icon?: string;
   info?: string | number;
-  info2?: string;
+  additionalInfo?: string;
   children?: React.ReactNode;
   showRedDot?: boolean;
   hideLine?: boolean;
   placeholder?: string | null;
+  to?: keyof RootStackParamList;
+  params?: any;
+  underlayColor?: 'string';
   onPress?: () => void;
 }
 
-const NavigateItem = (props: IProps) => {
+const ListItem = (props: Props) => {
+  const navigation = useNavigation();
   const {
     label,
     onPress,
     info,
+    additionalInfo,
     placeholder,
-    info2,
     showRedDot,
     children,
     hideLine,
+    to,
+    params,
+    underlayColor = '#fafafa',
   } = props;
   const handlePress = () => {
+    if (to) {
+      navigation.navigate(to, params);
+      return;
+    }
     onPress && onPress();
   };
-
   return (
     <View>
-      <TouchableHighlight underlayColor="#fafafa" onPress={handlePress}>
+      <TouchableHighlight underlayColor={underlayColor} onPress={handlePress}>
         <View
           style={{
             ...styles.container,
@@ -48,16 +75,18 @@ const NavigateItem = (props: IProps) => {
           </Text>
           {children ? (
             children
-          ) : info || info2 ? (
+          ) : info || additionalInfo ? (
             <>
               {info ? <Text style={styles.info}>{info}</Text> : null}
-              {info2 ? <Text style={styles.info}>{info2}</Text> : null}
+              {additionalInfo ? (
+                <Text style={styles.info}>{additionalInfo}</Text>
+              ) : null}
             </>
           ) : (
             <Text style={styles.placeholder}>{placeholder}</Text>
           )}
           {showRedDot ? <View style={styles.redDot} /> : null}
-          {onPress ? (
+          {onPress || to ? (
             <Image name="arrow" style={styles.arrow} width={30} height={30} />
           ) : null}
         </View>
@@ -66,7 +95,7 @@ const NavigateItem = (props: IProps) => {
   );
 };
 
-export default NavigateItem;
+export default ListItem;
 
 const styles = StyleSheet.create({
   container: {

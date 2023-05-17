@@ -124,7 +124,9 @@ const MyFlatList = (props: Props, ref: any) => {
   };
 
   const handleOnRefresh = () => {
-    if (freshingFlag.current) return;
+    if (freshingFlag.current) {
+      return;
+    }
     freshingFlag.current = true;
     initParams();
     setRefreshing(true);
@@ -146,7 +148,9 @@ const MyFlatList = (props: Props, ref: any) => {
       })
       .then(res => {
         onDataLoaded && onDataLoaded(res.result);
-        if (res.errorCode !== 0) return;
+        if (res.errorCode !== 0) {
+          return;
+        }
         let dataList =
           listKey === 'useResult' ? res.result : res.result[listKey];
         // 拿到数据后看是否需要对数据进行处理(如获取图片，添加key等等)
