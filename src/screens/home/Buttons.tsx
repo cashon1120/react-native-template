@@ -37,15 +37,17 @@ const Buttons = () => {
           <View style={{height: 15}} />
           <Button
             type="primary"
-            title="middle(default)"
+            title="middle(default) & loading"
             size="middle"
+            loading
             onPress={() => {}}
           />
           <View style={{height: 15}} />
           <Button
             type="primary"
-            title="small"
+            title="small & disabled"
             size="small"
+            disabled
             onPress={() => {}}
           />
           <View style={{height: 15}} />

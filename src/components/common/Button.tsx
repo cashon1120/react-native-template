@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextStyle,
   GestureResponderEvent,
+  ActivityIndicator,
 } from 'react-native';
 import Text from '@/components/common/Text';
 import {PRIMARY_COLOR} from '@/globalStyle';
@@ -30,7 +31,7 @@ type ButtonSize = 'large' | 'middle' | 'small' | 'mini-small';
  * @param radius 是否圆角, 默认是5, 如果设置了radius 就是20
  * @param disabled 是否禁用
  * @param loading 是否显示加载
- * @param loadingText 加载时显示的文本
+ * @param loadingColor 加载图标颜色
  * @param type 按钮样式, 参考 ButtonType
  * @param size 按钮大小, 参考 ButtonSize
  */
@@ -40,7 +41,7 @@ interface IProps {
   radius?: boolean;
   disabled?: boolean;
   loading?: boolean;
-  loadingText?: string;
+  loadingColor?: string;
   type?: ButtonType;
   size?: ButtonSize;
 }
@@ -61,31 +62,44 @@ interface Style extends SizeStyle {
 const Button = (props: IProps) => {
   const {
     onPress,
-    title,
+    title = '确认',
     disabled,
     size = 'middle',
     type = 'default',
     loading,
-    loadingText = '加载中',
+    loadingColor = '#fff',
     radius,
   } = props;
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={{borderRadius: radius ? 20 : 5}}
+      style={[{borderRadius: radius ? 20 : 5}]}
       disabled={disabled}
       activeOpacity={0.8}>
-      <View>
+      <View
+        style={[
+          styles.wrapper,
+          disabled ? styles.disabled : null,
+          radius ? styles.raidusWrapper : null,
+          styles[type ? type : ''],
+          styles[size],
+        ]}>
         <Text
           style={[
-            styles.wrapper,
             disabled ? styles.disabled : null,
             radius ? styles.raidusWrapper : null,
-            styles[type ? type : ''],
-            styles[size],
+            styles[`text-${type}`],
+            styles[`text-${size}`],
           ]}>
-          {loading ? loadingText : `${title || '确认'}`}
+          {title}
         </Text>
+        {loading ? (
+          <ActivityIndicator
+            style={{transform: [{scale: 0.8}]}}
+            size="small"
+            color={loadingColor}
+          />
+        ) : null}
       </View>
     </TouchableOpacity>
   );
@@ -94,14 +108,26 @@ const Button = (props: IProps) => {
 export default Button;
 
 const styles: Style = StyleSheet.create({
-  large: {padding: 12, fontSize: 18},
-  middle: {padding: 10, fontSize: 16},
-  small: {padding: 8, fontSize: 14},
+  large: {padding: 12},
+  middle: {padding: 10},
+  small: {padding: 8},
+  'text-large': {
+    fontSize: 18,
+  },
+  'text-middle': {
+    fontSize: 16,
+  },
+  'text-small': {
+    fontSize: 14,
+  },
   'mini-small': {padding: 3, fontSize: 12, paddingHorizontal: 10},
   wrapper: {
     borderRadius: 5,
     overflow: 'hidden',
-    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
   },
   default: {
     backgroundColor: '#fff',
@@ -109,36 +135,38 @@ const styles: Style = StyleSheet.create({
     borderColor: '#eee',
     borderWidth: 1,
   },
+  'text-default': {color: '#333'},
   primary: {
-    color: '#fff',
     backgroundColor: PRIMARY_COLOR,
   },
+  'text-primary': {color: '#fff'},
   'primary-line': {
     backgroundColor: '#fff',
     borderWidth: 1,
     borderColor: PRIMARY_COLOR,
-    color: PRIMARY_COLOR,
   },
+  'text-primary-line': {color: PRIMARY_COLOR},
   danger: {
     backgroundColor: DANGER_COLOR,
-    color: '#fff',
   },
+  'text-danger': {color: '#fff'},
   'danger-line': {
     backgroundColor: '#fff',
     borderWidth: 1,
     borderColor: DANGER_COLOR,
     color: DANGER_COLOR,
   },
+  'text-danger-line': {color: DANGER_COLOR},
   safe: {
     backgroundColor: SAFE_COLOR,
-    color: '#fff',
   },
+  'text-safe': {color: '#fff'},
   'safe-line': {
     backgroundColor: '#fff',
     borderWidth: 1,
     borderColor: SAFE_COLOR,
-    color: SAFE_COLOR,
   },
+  'text-safe-line': {color: SAFE_COLOR},
   raidusWrapper: {
     borderRadius: 20,
   },
