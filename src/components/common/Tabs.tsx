@@ -92,7 +92,10 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
               onPress={() => this.setActiveIndex(index, titles.length)}>
               <View>
                 <Text
-                  style={[activeIndex === index ? styles.active_text : null]}>
+                  style={[
+                    styles.title_text,
+                    activeIndex === index ? styles.active_text : null,
+                  ]}>
                   {title}
                 </Text>
               </View>
@@ -146,6 +149,11 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   active: {},
+  title_text: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#666',
+  },
   active_text: {
     color: PRIMARY_COLOR,
   },
