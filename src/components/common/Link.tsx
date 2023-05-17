@@ -27,7 +27,11 @@ const Link: FC<PropsWithChildren<Props>> = ({to, params, children}) => {
   const handlePress = () => {
     navigation.navigate(to, params);
   };
-  return <TouchableOpacity onPress={handlePress}>{children}</TouchableOpacity>;
+  return (
+    <TouchableOpacity style={{width: 'auto'}} onPress={handlePress}>
+      {children}
+    </TouchableOpacity>
+  );
 };
 
 export default Link;

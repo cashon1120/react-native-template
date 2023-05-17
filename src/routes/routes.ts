@@ -12,6 +12,7 @@ import BottomSheetDemo from '@/screens/home/BottomSheet';
 import OverlayDemo from '@/screens/home/Overlay';
 import Setting from '@/screens/user/Setting';
 import SwitchDemo from '@/screens/home/Switch';
+import LinkDemo from '@/screens/home/Link';
 
 export interface Route {
   name: keyof RootStackParamList;
@@ -30,6 +31,7 @@ const routes: Route[] = [
   {name: 'BottomSheetDemo', component: BottomSheetDemo},
   {name: 'OverlayDemo', component: OverlayDemo},
   {name: 'SwitchDemo', component: SwitchDemo},
+  {name: 'LinkDemo', component: LinkDemo},
 
   {name: 'Setting', component: Setting},
 ];

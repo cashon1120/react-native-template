@@ -1,6 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native';
-import {Header, Link, ListItem} from '@/components/common/Index';
+import {Header, ListItem} from '@/components/common/Index';
 
 const Index = () => {
   return (
@@ -13,9 +12,7 @@ const Index = () => {
       <ListItem label="BottomSheet" to="BottomSheetDemo" info="底部弹窗" />
       <ListItem label="Overlay" to="OverlayDemo" info="对话框" />
       <ListItem label="Switch" to="SwitchDemo" info="滑动开关" />
-      <Link to="ReportDetail">
-        <Text style={{padding: 15}}>Link组件, 跳转页面</Text>
-      </Link>
+      <ListItem label="Link" to="LinkDemo" info="页面跳转" />
     </>
   );
 };
