@@ -6,6 +6,8 @@ export interface ImagesProps {
   back_white: ImageSourcePropType;
   no_data: ImageSourcePropType;
   no_img: ImageSourcePropType;
+  pwd_hide: ImageSourcePropType;
+  pwd_show: ImageSourcePropType;
   tab_01: ImageSourcePropType;
   tab_01_active: ImageSourcePropType;
   tab_02: ImageSourcePropType;
@@ -20,6 +22,8 @@ const Images: ImagesProps = {
   back_white: require('./back_white.png'),
   no_data: require('./no_data.png'),
   no_img: require('./no_img.png'),
+  pwd_hide: require('./pwd_hide.png'),
+  pwd_show: require('./pwd_show.png'),
   tab_01: require('./tab_01.png'),
   tab_01_active: require('./tab_01_active.png'),
   tab_02: require('./tab_02.png'),

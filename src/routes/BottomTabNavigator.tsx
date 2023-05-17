@@ -5,9 +5,9 @@ import {ToastAndroid, BackHandler} from 'react-native';
 import {useAndroidBackHandler} from 'react-navigation-backhandler';
 import {BottomTabParamList} from './types';
 import BarIcon from './icon';
-import Work from '../screens/home/Index';
-import Report from '../screens/report/Index';
-import User from '../screens/user/Index';
+import Work from '@/screens/home/Index';
+import Report from '@/screens/report/Index';
+import User from '@/screens/user/Index';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 

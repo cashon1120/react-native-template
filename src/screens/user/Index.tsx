@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import {useStore} from '@/models/global';
-import {Button, ListItem, StatusBar, Image} from '@/components/common/Index';
+import {ListItem, StatusBar, Image} from '@/components/common/Index';
 import globalStyle, {PRIMARY_COLOR} from '@/globalStyle';
 
-const Index = () => {
+const UserIndex = () => {
   const store = useStore('rootStore');
   return (
     <>
@@ -20,15 +20,12 @@ const Index = () => {
           用户中心
         </Text>
       </View>
-      <ListItem label="清除缓存" onPress={() => {}} />
-      <View style={{padding: 15}}>
-        <Button title="退出登录" onPress={() => {}} type="red-line" />
-      </View>
+      <ListItem label="设置" to="Setting" />
     </>
   );
 };
 
-export default Index;
+export default UserIndex;
 
 const styles = StyleSheet.create({
   top: {

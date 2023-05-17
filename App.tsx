@@ -13,7 +13,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Navigation from './src/routes/index';
 
 function App(): JSX.Element {
-  const [defaultPage] = useState('Root');
+  const [defaultPage] = useState('Login');
   return (
     <SafeAreaProvider>
       <RootSiblingParent>

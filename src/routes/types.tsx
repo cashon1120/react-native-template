@@ -4,6 +4,7 @@
  */
 // undefind 代表没有参数
 export type RootStackParamList = {
+  Login: undefined;
   Root: undefined;
   WorkDetail: undefined;
   ReportDetail: undefined;
@@ -11,6 +12,8 @@ export type RootStackParamList = {
   Toasts: undefined;
   Tabs: undefined;
   SpinningDemo: undefined;
+
+  Setting: undefined;
 };
 
 export type BottomTabParamList = {
