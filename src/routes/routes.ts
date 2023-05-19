@@ -17,6 +17,7 @@ import DatePickerDemo from '@/screens/home/DatePicker';
 import FlexDemo from '@/screens/home/Flex';
 import SafeBottomDemo from '@/screens/home/SafeBottom';
 import GridDemo from '@/screens/home/Grid';
+import PickerDemo from '@/screens/home/Picker';
 export interface Route {
   name: keyof RootStackParamList;
   component: any;
@@ -39,6 +40,7 @@ const routes: Route[] = [
   {name: 'FlexDemo', component: FlexDemo},
   {name: 'SafeBottomDemo', component: SafeBottomDemo},
   {name: 'GridDemo', component: GridDemo},
+  {name: 'PickerDemo', component: PickerDemo},
 
   {name: 'Setting', component: Setting},
 ];

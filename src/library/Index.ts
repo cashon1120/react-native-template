@@ -21,6 +21,7 @@ import Card from './Card';
 import {Col, Row} from './Flex';
 import PlacehoderView from './PlacehoderView';
 import Grid, {GridItem} from './Grid';
+import Picker from './Picker';
 
 export {
   FlatList,
@@ -49,4 +50,5 @@ export {
   PlacehoderView,
   Grid,
   GridItem,
+  Picker,
 };

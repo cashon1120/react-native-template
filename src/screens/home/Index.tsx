@@ -19,6 +19,7 @@ const Index = () => {
         <ListItem label="Switch" to="SwitchDemo" info="滑动开关" />
         <ListItem label="Link" to="LinkDemo" info="页面跳转" />
         <ListItem label="DatePicker" to="DatePickerDemo" info="日期选择" />
+        <ListItem label="Picker" to="PickerDemo" info="选择器" />
       </ScrollView>
     </>
   );

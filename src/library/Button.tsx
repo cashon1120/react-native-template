@@ -37,7 +37,7 @@ type ButtonSize = 'large' | 'middle' | 'small' | 'mini';
  * @param size 按钮大小, 参考 ButtonSize
  */
 interface IProps {
-  onPress: (event: GestureResponderEvent) => void;
+  onPress?: (event: GestureResponderEvent) => void;
   title?: string;
   radius?: boolean;
   disabled?: boolean;
@@ -63,7 +63,7 @@ interface Style extends SizeStyle {
 
 const Button = (props: IProps) => {
   const {
-    onPress,
+    onPress = () => {},
     title = '确认',
     disabled,
     size = 'middle',

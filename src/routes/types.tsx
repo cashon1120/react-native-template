@@ -20,6 +20,7 @@ export type RootStackParamList = {
   FlexDemo: undefined;
   SafeBottomDemo: undefined;
   GridDemo: undefined;
+  PickerDemo: undefined;
 
   Setting: undefined;
 };
