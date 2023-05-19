@@ -22,7 +22,7 @@ const TabDemo = () => {
           <Text>1</Text>
         </Tabs.Item>
         <Tabs.Item title="tab2">
-          <Text>默认active: 1</Text>
+          <Text>默认activeIndex: 1</Text>
         </Tabs.Item>
       </Tabs>
 
