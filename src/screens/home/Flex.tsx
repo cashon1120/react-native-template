@@ -59,7 +59,7 @@ const LinkDemo = () => {
         <PlacehoderView height={15} />
         <Text>Row 继承 Col 部分属性，但多了flex</Text>
         <Col style={styles.col} justifyContent="center">
-          <Row style={styles.row} alignItems="center" flex={1}>
+          <Row style={styles.row} flex={1}>
             <Text color="#fff">flex: 1</Text>
           </Row>
           <Row style={styles.row} />
