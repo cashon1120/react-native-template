@@ -18,6 +18,8 @@ export type RootStackParamList = {
   LinkDemo: undefined;
   DatePickerDemo: undefined;
   FlexDemo: undefined;
+  SafeBottomDemo: undefined;
+
   Setting: undefined;
 };
 

@@ -11,13 +11,15 @@ import {PRIMARY_COLOR} from '@/globalStyle';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
 
-interface ItemProps {
-  title: string;
-}
-
 interface TabsProps {
   children?: React.ReactElement[];
-  active?: number;
+  activeIndex?: number;
+  activeColor?: string;
+  onChange?: (index: number) => void;
+}
+
+interface ItemProps {
+  title: string;
 }
 
 interface TabsState {
@@ -33,7 +35,7 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
   constructor(props: TabsProps) {
     super(props);
     this.state = {
-      activeIndex: props.active || 0,
+      activeIndex: props.activeIndex || 0,
       titles: [],
       contents: [],
       activeLineAnim: new Animated.Value(0),
@@ -42,9 +44,11 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
   }
 
   setActiveIndex = (index: number, tabLength: number) => {
+    const {onChange} = this.props;
     this.setState({
       activeIndex: index,
     });
+    onChange && onChange(index);
     Animated.timing(this.state.activeLineAnim, {
       toValue: (WINDOW_WIDTH / tabLength) * index,
       duration: 200,
@@ -72,13 +76,14 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
         contents,
       },
       () => {
-        this.setActiveIndex(this.props.active || 0, titles.length);
+        this.setActiveIndex(this.props.activeIndex || 0, titles.length);
       },
     );
   }
 
   render(): React.ReactNode {
     const {activeIndex, titles, contents} = this.state;
+    const {activeColor = PRIMARY_COLOR} = this.props;
     return (
       <>
         <View style={styles.title}>
@@ -94,7 +99,7 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
                 <Text
                   style={[
                     styles.title_text,
-                    activeIndex === index ? styles.active_text : null,
+                    activeIndex === index ? {color: activeColor} : null,
                   ]}>
                   {title}
                 </Text>
@@ -109,7 +114,7 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
                 transform: [{translateX: this.state.activeLineAnim || 0}],
               },
             ]}>
-            <View style={styles.active_in} />
+            <View style={[styles.active_in, {backgroundColor: activeColor}]} />
           </Animated.View>
         </View>
         <Animated.View
