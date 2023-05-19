@@ -12,12 +12,12 @@ interface Props {
   value: boolean;
   disabled?: boolean;
   activeColor?: string;
-  size?: 'default' | 'small';
+  size?: 'large' | 'middle' | 'small';
 }
 
 const Switch = (props: Props) => {
   const {
-    size = 'default',
+    size = 'middle',
     activeColor = PRIMARY_COLOR,
     value,
     disabled,
@@ -27,10 +27,13 @@ const Switch = (props: Props) => {
     if (!value) {
       return 1;
     }
-    if (size === 'default') {
-      return 60 - 27;
+    if (size === 'large') {
+      return 65 - 30;
     }
-    return 50 - 23;
+    if (size === 'middle') {
+      return 55 - 25;
+    }
+    return 45 - 21;
   };
   const dottedAnim = useRef(new Animated.Value(getValue())).current;
   const handleToggleValue = () => {
@@ -78,24 +81,34 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 1,
   },
-  default: {
-    width: 60,
+  large: {
+    width: 65,
+    height: 30,
+    borderRadius: 25,
+  },
+  'dotted-large': {
+    width: 28,
     height: 28,
     borderRadius: 25,
   },
-  'dotted-default': {
-    width: 26,
+  middle: {
+    width: 55,
     height: 26,
+    borderRadius: 23,
+  },
+  'dotted-middle': {
+    width: 24,
+    height: 24,
     borderRadius: 13,
   },
   small: {
-    width: 50,
-    height: 24,
-    borderRadius: 20,
+    width: 45,
+    height: 22,
+    borderRadius: 23,
   },
   'dotted-small': {
-    width: 22,
-    height: 22,
-    borderRadius: 13,
+    width: 20,
+    height: 20,
+    borderRadius: 10,
   },
 });

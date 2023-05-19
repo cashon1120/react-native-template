@@ -22,7 +22,7 @@ interface ColProps {
   x?: number;
   y?: number;
 }
-interface RowProps extends Omit<ColProps, 'direction'> {
+interface RowProps extends ColProps {
   flex?: number;
 }
 
@@ -64,9 +64,10 @@ const Row: FC<PropsWithChildren<RowProps>> = ({
   style,
   x,
   y,
-  alignItems = 'center',
+  alignItems = 'flex-start',
   justifyContent = 'flex-start',
   children,
+  direction = 'row',
   flex,
 }) => {
   const paddingStyles = {
@@ -79,7 +80,7 @@ const Row: FC<PropsWithChildren<RowProps>> = ({
     <View
       style={[
         styles.wrapper,
-        {flex, alignItems, justifyContent},
+        {flex, alignItems, justifyContent, flexDirection: direction},
         paddingStyles,
         style,
       ]}>
