@@ -6,6 +6,7 @@ interface Props {
   color?: string;
   style?: TextStyle | TextStyle[];
   textAlign?: 'center' | 'left' | 'right';
+  allowFontScaling?: boolean;
   fontWeight?:
     | '100'
     | '200'
@@ -27,10 +28,11 @@ const MyText: FC<PropsWithChildren<Props>> = ({
   textAlign = 'left',
   children,
   style,
+  allowFontScaling = false,
 }) => {
   return (
     <Text
-      allowFontScaling={false}
+      allowFontScaling={allowFontScaling}
       style={[{fontSize: size, color, fontWeight, textAlign}, style]}>
       {children}
     </Text>

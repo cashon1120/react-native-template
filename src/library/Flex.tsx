@@ -22,7 +22,7 @@ interface ColProps {
   x?: number;
   y?: number;
 }
-interface RowProps extends ColProps {
+interface RowProps extends Pick<ColProps, 'style' | 'x' | 'y'> {
   flex?: number;
 }
 
@@ -64,29 +64,16 @@ const Row: FC<PropsWithChildren<RowProps>> = ({
   style,
   x,
   y,
-  alignItems = 'flex-start',
-  justifyContent = 'flex-start',
   children,
-  direction = 'row',
   flex,
 }) => {
-  const paddingStyles = {
+  const marginStyles = {
     marginLeft: x,
     marginRight: x,
     marginTop: y,
     marginBottom: y,
   };
-  return (
-    <View
-      style={[
-        styles.wrapper,
-        {flex, alignItems, justifyContent, flexDirection: direction},
-        paddingStyles,
-        style,
-      ]}>
-      {children}
-    </View>
-  );
+  return <View style={[{flex}, marginStyles, style]}>{children}</View>;
 };
 
 export {Col, Row};
