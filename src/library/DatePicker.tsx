@@ -13,27 +13,27 @@ interface Props {
   minimumDate?: string; // 最小可选日期，如：2023-05-01
   maximumDate?: string; // 最大可选日期
   title?: string; // 标题
+  mode?: 'datetime' | 'date' | 'time';
 }
-
-const getDate = (date?: string) => {
-  if (!date || isNaN(Date.parse(date))) {
-    return undefined;
-  }
-  return new Date(date);
-};
 
 const DateSelecte = (props: Props) => {
   const {
     onChange,
     onCancel,
     visible,
+    mode = 'date',
     title = '请选择时间',
     defaultDate,
     minimumDate,
     maximumDate,
   } = props;
+  const getDate = (date?: string) => {
+    if (!date || isNaN(Date.parse(date))) {
+      return undefined;
+    }
+    return new Date(date);
+  };
   const [date, setDate] = useState<Date>(getDate(defaultDate) || new Date());
-
   const selectedDate = useRef<Date>();
   const handleDateChange = (value: Date) => {
     selectedDate.current = value;
@@ -43,7 +43,6 @@ const DateSelecte = (props: Props) => {
     setDate(selectedDate.current as Date);
     onChange(selectedDate.current);
   };
-
   return (
     <>
       <BottomSheet visible={visible} onCancel={onCancel}>
@@ -56,7 +55,7 @@ const DateSelecte = (props: Props) => {
             <TouchableOpacity style={styles.btn} onPress={() => onCancel()}>
               <Text style={[styles.btn_text, styles.btn_cancel]}>取消</Text>
             </TouchableOpacity>
-            <Row>
+            <Row flex={1} justifyContent="center">
               <Text style={styles.title}>{title}</Text>
             </Row>
             <TouchableOpacity style={styles.btn} onPress={handleSelectDate}>
@@ -66,7 +65,7 @@ const DateSelecte = (props: Props) => {
 
           <DatePicker
             date={date}
-            mode="date"
+            mode={mode}
             locale="zh"
             textColor="#000"
             onDateChange={handleDateChange}
