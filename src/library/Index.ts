@@ -20,6 +20,7 @@ import DatePicker from './DatePicker';
 import Card from './Card';
 import {Col, Row} from './Flex';
 import PlacehoderView from './PlacehoderView';
+import Grid, {GridItem} from './Grid';
 
 export {
   FlatList,
@@ -46,4 +47,6 @@ export {
   Col,
   Row,
   PlacehoderView,
+  Grid,
+  GridItem,
 };

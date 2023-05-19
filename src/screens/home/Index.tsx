@@ -8,6 +8,7 @@ const Index = () => {
       <Header text="首页" disableBack />
       <ScrollView>
         <ListItem label="Flex" to="FlexDemo" info="布局" />
+        <ListItem label="Grid" to="GridDemo" info="宫格" />
         <ListItem label="Button" to="ButtonsDemo" info="按钮" />
         <ListItem label="SafeBottom" to="SafeBottomDemo" info="底部内容" />
         <ListItem label="Toast" to="ToastsDemo" info="轻提示" />

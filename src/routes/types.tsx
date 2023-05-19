@@ -19,6 +19,7 @@ export type RootStackParamList = {
   DatePickerDemo: undefined;
   FlexDemo: undefined;
   SafeBottomDemo: undefined;
+  GridDemo: undefined;
 
   Setting: undefined;
 };
