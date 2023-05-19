@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text} from 'react-native';
-import {Switch, Header} from '@/components/common/Index';
+import {Switch, Header} from '@/library/Index';
 
 const SwitchDemo = () => {
   const [checked, setChecked] = useState(true);

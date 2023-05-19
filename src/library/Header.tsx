@@ -10,9 +10,9 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {observer} from 'mobx-react';
 import {useStore} from '@/models/global';
-import Image from '@/components/common/Image';
-import StatusBar, {BarStypeProps} from '@/components/common/StatusBar';
-import Text from '@/components/common/Text';
+import Image from '@/library/Image';
+import StatusBar, {BarStypeProps} from '@/library/StatusBar';
+import Text from '@/library/Text';
 import globalStyle, {PRIMARY_COLOR} from '@/globalStyle';
 
 type BackStyle = Partial<{

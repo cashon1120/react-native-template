@@ -8,15 +8,17 @@ export type RootStackParamList = {
   Root: undefined;
   WorkDetail: undefined;
   ReportDetail: undefined;
-  Buttons: undefined;
-  Toasts: undefined;
-  Tabs: undefined;
+  ButtonsDemo: undefined;
+  ToastsDemo: undefined;
+  TabsDemo: undefined;
   SpinningDemo: undefined;
   SwitchDemo: undefined;
-  Setting: undefined;
   BottomSheetDemo: undefined;
   OverlayDemo: undefined;
   LinkDemo: undefined;
+  DatePickerDemo: undefined;
+  FlexDemo: undefined;
+  Setting: undefined;
 };
 
 export type BottomTabParamList = {

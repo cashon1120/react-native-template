@@ -13,6 +13,8 @@ import OverlayDemo from '@/screens/home/Overlay';
 import Setting from '@/screens/user/Setting';
 import SwitchDemo from '@/screens/home/Switch';
 import LinkDemo from '@/screens/home/Link';
+import DatePickerDemo from '@/screens/home/DatePicker';
+import FlexDemo from '@/screens/home/Flex';
 
 export interface Route {
   name: keyof RootStackParamList;
@@ -24,14 +26,16 @@ const routes: Route[] = [
   {name: 'Root', component: BottomTabNavigator},
   {name: 'WorkDetail', component: WorkDetail},
   {name: 'ReportDetail', component: ReportDetail},
-  {name: 'Buttons', component: Buttons},
-  {name: 'Toasts', component: Toasts},
-  {name: 'Tabs', component: Tabs},
+  {name: 'ButtonsDemo', component: Buttons},
+  {name: 'ToastsDemo', component: Toasts},
+  {name: 'TabsDemo', component: Tabs},
   {name: 'SpinningDemo', component: SpinningDemo},
   {name: 'BottomSheetDemo', component: BottomSheetDemo},
   {name: 'OverlayDemo', component: OverlayDemo},
   {name: 'SwitchDemo', component: SwitchDemo},
   {name: 'LinkDemo', component: LinkDemo},
+  {name: 'DatePickerDemo', component: DatePickerDemo},
+  {name: 'FlexDemo', component: FlexDemo},
 
   {name: 'Setting', component: Setting},
 ];

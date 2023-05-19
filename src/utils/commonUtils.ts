@@ -1,7 +1,12 @@
-import {Dimensions, NativeModules, Platform} from 'react-native';
+import {
+  Dimensions,
+  NativeModules,
+  Platform,
+  LayoutChangeEvent,
+} from 'react-native';
 
-// 获取节点数据?
-export const getComponentInfo = (event: any) => {
+// 获取节点数据, 在节点的 onLayout 回调事件里执行
+export const getComponentInfo = (event: LayoutChangeEvent) => {
   let {x, y, width, height} = event.nativeEvent.layout;
   return {
     x,
@@ -24,7 +29,7 @@ export const setUISize = (width: number, height?: number) => {
 
 // 获取Bar高度
 export const getBarHeight = () => {
-  return new Promise((resolve: any) => {
+  return new Promise(resolve => {
     const {StatusBarManager} = NativeModules;
     if (Platform.OS === 'ios') {
       StatusBarManager.getHeight((statusBarHeight: any) => {

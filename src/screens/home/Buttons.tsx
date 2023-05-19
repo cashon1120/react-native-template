@@ -6,7 +6,7 @@ import {
   SafeBottom,
   FullScreenWrapper,
   FullScreenMain,
-} from '../../components/common/Index';
+} from '../../library/Index';
 
 const Buttons = () => {
   return (

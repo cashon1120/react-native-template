@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text} from 'react-native';
-import {Tabs, Header} from '@/components/common/Index';
+import {Tabs, Header} from '@/library/Index';
 const TabDemo = () => {
   return (
     <>
@@ -12,7 +12,6 @@ const TabDemo = () => {
         <Tabs.Item title="tab2">
           <Text>2</Text>
         </Tabs.Item>
-        <Text>3</Text>
       </Tabs>
     </>
   );

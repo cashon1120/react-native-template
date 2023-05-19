@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text} from 'react-native';
-import Header from '@/components/common/Header';
+import Header from '@/library/Header';
 
 const Index = () => {
   return (

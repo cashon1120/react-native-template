@@ -1,5 +1,5 @@
 import React from 'react';
-import Image, {NameProps} from '@/components/common/Image';
+import Image, {NameProps} from '@/library/Image';
 
 interface IProps {
   name: NameProps;

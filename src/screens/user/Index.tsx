@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import {useStore} from '@/models/global';
-import {ListItem, StatusBar, Image} from '@/components/common/Index';
+import {ListItem, StatusBar, Image} from '@/library/Index';
 import globalStyle, {PRIMARY_COLOR} from '@/globalStyle';
 
 const UserIndex = () => {

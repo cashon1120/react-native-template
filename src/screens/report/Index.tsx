@@ -1,5 +1,5 @@
 import React from 'react';
-import {Header} from '@/components/common/Index';
+import {Header} from '@/library/Index';
 
 const Index = () => {
   return (

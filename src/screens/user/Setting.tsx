@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import {Button, Header, ListItem} from '@/components/common/Index';
+import {Button, Header, ListItem} from '@/library/Index';
 
 const Setting = () => {
   return (

@@ -6,8 +6,9 @@ import {
   TextStyle,
   GestureResponderEvent,
   ActivityIndicator,
+  ViewStyle,
 } from 'react-native';
-import Text from '@/components/common/Text';
+import Text from '@/library/Text';
 import {PRIMARY_COLOR} from '@/globalStyle';
 
 // 配置颜色
@@ -44,6 +45,7 @@ interface IProps {
   loadingColor?: string;
   type?: ButtonType;
   size?: ButtonSize;
+  style?: ViewStyle;
 }
 type TypeStyle = {
   [key in ButtonType]: TextStyle;
@@ -69,6 +71,7 @@ const Button = (props: IProps) => {
     loading,
     loadingColor = '#fff',
     radius,
+    style,
   } = props;
   return (
     <TouchableOpacity
@@ -83,6 +86,7 @@ const Button = (props: IProps) => {
           radius ? styles.raidusWrapper : null,
           styles[type ? type : ''],
           styles[size],
+          style,
         ]}>
         <Text
           style={[

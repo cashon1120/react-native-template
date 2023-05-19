@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Text, View} from 'react-native';
-import {Overlay, Button, Header} from '@/components/common/Index';
+import {Overlay, Button, Header} from '@/library/Index';
 
 const OverlayDemo = () => {
   const [visible, setVisible] = useState(false);

@@ -1,12 +1,12 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import {Link, Header} from '@/components/common/Index';
+import {Link, Header} from '@/library/Index';
 const LinkDemo = () => {
   return (
     <>
       <Header text="Link" />
       <View style={{padding: 15}}>
-        <Link to="Tabs">
+        <Link to="ButtonsDemo">
           <Text>跳转到Tab</Text>
         </Link>
       </View>

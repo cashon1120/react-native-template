@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {Spinning} from '@/components/common/Index';
+import {Spinning} from '@/library/Index';
 const useSpinning = () => {
   useEffect(() => {
     return () => {

@@ -16,6 +16,10 @@ import Mask from './Mask';
 import BottomSheet from './BottomSheet';
 import Overlay from './Overlay';
 import Switch from './Switch';
+import DatePicker from './DatePicker';
+import Card from './Card';
+import {Col, Row} from './Flex';
+import PlacehoderView from './PlacehoderView';
 
 export {
   FlatList,
@@ -37,4 +41,9 @@ export {
   Mask,
   Overlay,
   Switch,
+  DatePicker,
+  Card,
+  Col,
+  Row,
+  PlacehoderView,
 };

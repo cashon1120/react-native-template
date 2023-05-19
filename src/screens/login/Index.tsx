@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useNavigation from '@/hooks/useNavigation';
-import {Toast, StatusBar, Image, Button} from '@/components/common/Index';
+import {Toast, StatusBar, Image, Button} from '@/library/Index';
 import http from '@/utils/http';
 import global from '@/global';
 

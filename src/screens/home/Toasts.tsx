@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import {Header, Toast, Button} from '../../components/common/Index';
+import {Header, Toast, Button} from '../../library/Index';
 
 const Toasts = () => {
   return (

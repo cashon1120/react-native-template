@@ -5,7 +5,9 @@ import {ToastAndroid, BackHandler} from 'react-native';
 import {useAndroidBackHandler} from 'react-navigation-backhandler';
 import {BottomTabParamList} from './types';
 import BarIcon from './icon';
-import Work from '@/screens/home/Index';
+import {PRIMARY_COLOR} from '@/globalStyle';
+
+import Home from '@/screens/home/Index';
 import Report from '@/screens/report/Index';
 import User from '@/screens/user/Index';
 
@@ -29,7 +31,7 @@ export default function BottomTabNavigator() {
       screenOptions={({route}) => ({
         tabBarIcon: options => <BarIcon route={route} options={options} />,
         header: () => <></>,
-        tabBarActiveTintColor: '#466CF5',
+        tabBarActiveTintColor: PRIMARY_COLOR,
         tabBarLabelStyle: {
           fontSize: 12,
           top: -5,
@@ -37,7 +39,7 @@ export default function BottomTabNavigator() {
       })}>
       <BottomTab.Screen
         name="Home"
-        component={Work}
+        component={Home}
         options={{
           title: '首页',
         }}
