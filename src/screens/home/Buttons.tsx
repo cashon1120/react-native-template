@@ -6,6 +6,8 @@ import {
   SafeBottom,
   FullScreenWrapper,
   FullScreenMain,
+  Col,
+  Row,
 } from '../../library/Index';
 
 const Buttons = () => {
@@ -14,55 +16,99 @@ const Buttons = () => {
       <Header text="Button" />
       <FullScreenMain>
         <ScrollView>
-          <View style={{padding: 15}}>
-            <Button title="默认" onPress={() => {}} />
-            <View style={{height: 15}} />
-            <Button type="primary" title="primary" onPress={() => {}} />
-            <View style={{height: 15}} />
-            <Button
-              type="primary-line"
-              title="primary-line"
-              onPress={() => {}}
-            />
-            <View style={{height: 15}} />
-            <Button type="danger" title="danger" onPress={() => {}} />
-            <View style={{height: 15}} />
-            <Button type="danger-line" title="danger-line" onPress={() => {}} />
-            <View style={{height: 15}} />
-            <Button type="safe" title="safe" onPress={() => {}} />
-            <View style={{height: 15}} />
-            <Button type="safe-line" title="safe-line" onPress={() => {}} />
-            <View style={{height: 15}} />
-            <Button
-              type="primary"
-              title="large"
-              size="large"
-              onPress={() => {}}
-            />
-            <View style={{height: 15}} />
-            <Button
-              type="primary"
-              title="middle(default) & loading"
-              size="middle"
-              loading
-              onPress={() => {}}
-            />
-            <View style={{height: 15}} />
-            <Button
-              type="primary"
-              title="small & disabled"
-              size="small"
-              disabled
-              onPress={() => {}}
-            />
-            <View style={{height: 15}} />
-            <Button
-              type="primary"
-              title="mini-small"
-              size="mini-small"
-              onPress={() => {}}
-            />
-          </View>
+          <Col x={15} y={8}>
+            <Row>
+              <Button title="默认" onPress={() => {}} />
+            </Row>
+          </Col>
+          <Col x={15} y={8}>
+            <Row>
+              <Button type="primary" title="primary" onPress={() => {}} />
+            </Row>
+            <Row>
+              <Button
+                type="primary-line"
+                title="primary-line"
+                onPress={() => {}}
+              />
+            </Row>
+          </Col>
+          <Col x={15} y={8}>
+            <Row>
+              <Button type="danger" title="danger" onPress={() => {}} />
+            </Row>
+            <Row>
+              <Button
+                type="danger-line"
+                title="danger-line"
+                onPress={() => {}}
+              />
+            </Row>
+          </Col>
+
+          <Col x={15} y={8}>
+            <Row>
+              <Button type="safe" title="safe" onPress={() => {}} />
+            </Row>
+            <Row>
+              <Button type="safe-line" title="safe-line" onPress={() => {}} />
+            </Row>
+          </Col>
+
+          <Col x={15} y={8}>
+            <Row>
+              <Button
+                type="primary"
+                title="large"
+                size="large"
+                onPress={() => {}}
+              />
+            </Row>
+            <Row>
+              <Button
+                type="primary"
+                title="middle"
+                size="middle"
+                onPress={() => {}}
+              />
+            </Row>
+            <Row>
+              <Button
+                type="primary"
+                title="small"
+                size="small"
+                disabled
+                onPress={() => {}}
+              />
+            </Row>
+
+            <Row>
+              <Button
+                type="primary"
+                title="mini"
+                size="mini"
+                onPress={() => {}}
+              />
+            </Row>
+          </Col>
+          <Col x={15} y={8}>
+            <Row>
+              <Button
+                type="primary"
+                title="disabled"
+                disabled
+                onPress={() => {}}
+              />
+            </Row>
+            <Row>
+              <Button
+                type="primary"
+                title="loading"
+                loading
+                onPress={() => {}}
+              />
+            </Row>
+          </Col>
         </ScrollView>
       </FullScreenMain>
       <SafeBottom>

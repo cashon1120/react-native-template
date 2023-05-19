@@ -4,7 +4,7 @@ import {Text, TextStyle} from 'react-native';
 interface Props {
   size?: number;
   color?: string;
-  style?: TextStyle;
+  style?: TextStyle | TextStyle[];
   textAlign?: 'center' | 'left' | 'right';
   fontWeight?:
     | '100'

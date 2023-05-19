@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
   ViewStyle,
 } from 'react-native';
-import Text from '@/library/Text';
+import Text from './Text';
 import {PRIMARY_COLOR} from '@/globalStyle';
 
 // 配置颜色
@@ -23,7 +23,7 @@ type ButtonType =
   | 'danger-line'
   | 'safe'
   | 'safe-line';
-type ButtonSize = 'large' | 'middle' | 'small' | 'mini-small';
+type ButtonSize = 'large' | 'middle' | 'small' | 'mini';
 
 /**
  * interface Props
@@ -45,20 +45,20 @@ interface IProps {
   loadingColor?: string;
   type?: ButtonType;
   size?: ButtonSize;
-  style?: ViewStyle;
+  style?: ViewStyle | ViewStyle[];
 }
 type TypeStyle = {
-  [key in ButtonType]: TextStyle;
+  [key in ButtonType]: TextStyle | TextStyle[];
 };
 
 type SizeStyle = {
-  [key in ButtonSize]: TextStyle;
+  [key in ButtonSize]: TextStyle | TextStyle[];
 };
 
 interface Style extends TypeStyle {}
 
 interface Style extends SizeStyle {
-  [prop: string]: TextStyle;
+  [prop: string]: TextStyle | TextStyle[];
 }
 
 const Button = (props: IProps) => {
@@ -88,13 +88,7 @@ const Button = (props: IProps) => {
           styles[size],
           style,
         ]}>
-        <Text
-          style={[
-            disabled ? styles.disabled : null,
-            radius ? styles.raidusWrapper : null,
-            styles[`text-${type}`],
-            styles[`text-${size}`],
-          ]}>
+        <Text style={{...styles[`text-${type}`], ...styles[`text-${size}`]}}>
           {title}
         </Text>
         {loading ? (
@@ -112,9 +106,10 @@ const Button = (props: IProps) => {
 export default Button;
 
 const styles: Style = StyleSheet.create({
-  large: {padding: 12},
-  middle: {padding: 10},
-  small: {padding: 8},
+  large: {padding: 10, borderRadius: 5},
+  middle: {padding: 8, borderRadius: 4},
+  small: {padding: 6, borderRadius: 3},
+  mini: {padding: 4, paddingHorizontal: 8, borderRadius: 2},
   'text-large': {
     fontSize: 18,
   },
@@ -124,9 +119,10 @@ const styles: Style = StyleSheet.create({
   'text-small': {
     fontSize: 14,
   },
-  'mini-small': {padding: 3, fontSize: 12, paddingHorizontal: 10},
+  'text-mini': {
+    fontSize: 12,
+  },
   wrapper: {
-    borderRadius: 5,
     overflow: 'hidden',
     justifyContent: 'center',
     alignItems: 'center',
@@ -142,6 +138,8 @@ const styles: Style = StyleSheet.create({
   'text-default': {color: '#333'},
   primary: {
     backgroundColor: PRIMARY_COLOR,
+    borderWidth: 1,
+    borderColor: PRIMARY_COLOR,
   },
   'text-primary': {color: '#fff'},
   'primary-line': {
@@ -152,6 +150,8 @@ const styles: Style = StyleSheet.create({
   'text-primary-line': {color: PRIMARY_COLOR},
   danger: {
     backgroundColor: DANGER_COLOR,
+    borderWidth: 1,
+    borderColor: DANGER_COLOR,
   },
   'text-danger': {color: '#fff'},
   'danger-line': {
@@ -163,6 +163,8 @@ const styles: Style = StyleSheet.create({
   'text-danger-line': {color: DANGER_COLOR},
   safe: {
     backgroundColor: SAFE_COLOR,
+    borderWidth: 1,
+    borderColor: SAFE_COLOR,
   },
   'text-safe': {color: '#fff'},
   'safe-line': {
