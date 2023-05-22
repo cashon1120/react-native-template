@@ -45,7 +45,6 @@ const Col: FC<PropsWithChildren<ColProps>> = ({
     paddingBottom: _y,
     marginLeft: x ? -x : 0,
     marginRight: x ? -x : 0,
-    marginTop: 0,
     paddingHorizontal: 0,
     paddingVertical: 0,
   };

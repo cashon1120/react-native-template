@@ -19,14 +19,12 @@ const Grid: FC<PropsWithChildren<Props>> = ({children, row = 1, x, y}) => {
     marginRight: x ? -x : 0,
     paddingHorizontal: 0,
     paddingVertical: 0,
-    marginTop: 0,
   };
   if (x) {
     boxStyles.paddingHorizontal = _x;
   }
   if (y) {
     boxStyles.paddingVertical = _y;
-    boxStyles.marginTop = -y;
   }
   const newChildren = React.Children.map(children, (child: any) => {
     if (child.type.displayName === 'GridItem') {
@@ -43,6 +41,8 @@ export const GridItem: FC<PropsWithChildren> = (props: any) => {
     paddingRight: x,
     paddingTop: y,
     paddingBottom: y,
+    paddingHorizontal: x,
+    paddingVertical: y,
   };
   return <View style={[boxStyles, {width}]}>{children}</View>;
 };
