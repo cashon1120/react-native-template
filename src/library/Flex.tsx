@@ -22,7 +22,12 @@ interface ColProps {
   x?: number;
   y?: number;
 }
-interface RowProps extends Pick<ColProps, 'style' | 'x' | 'y'> {
+interface RowProps
+  extends Pick<
+    ColProps,
+    'style' | 'x' | 'y' | 'alignItems' | 'justifyContent'
+  > {
+  flexBox?: boolean;
   flex?: number;
 }
 
@@ -65,6 +70,9 @@ const Row: FC<PropsWithChildren<RowProps>> = ({
   x,
   y,
   children,
+  flexBox,
+  alignItems = 'flex-start',
+  justifyContent = 'flex-start',
   flex,
 }) => {
   const marginStyles = {
@@ -73,7 +81,17 @@ const Row: FC<PropsWithChildren<RowProps>> = ({
     marginTop: y,
     marginBottom: y,
   };
-  return <View style={[{flex}, marginStyles, style]}>{children}</View>;
+  let flexStyles: any = {};
+  if (flexBox) {
+    flexStyles = {
+      display: 'flex',
+      alignItems,
+      justifyContent,
+    };
+  }
+  return (
+    <View style={[{flex}, flexStyles, marginStyles, style]}>{children}</View>
+  );
 };
 
 export {Col, Row};
