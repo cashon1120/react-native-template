@@ -9,7 +9,6 @@ import Toasts from '@/screens/home/Toasts';
 import Tabs from '@/screens/home/Tabs';
 import SpinningDemo from '@/screens/home/Spinning';
 import ModalDemo from '@/screens/home/Modal';
-import OverlayDemo from '@/screens/home/Overlay';
 import Setting from '@/screens/user/Setting';
 import SwitchDemo from '@/screens/home/Switch';
 import LinkDemo from '@/screens/home/Link';
@@ -33,7 +32,6 @@ const routes: Route[] = [
   {name: 'TabsDemo', component: Tabs},
   {name: 'SpinningDemo', component: SpinningDemo},
   {name: 'ModalDemo', component: ModalDemo},
-  {name: 'OverlayDemo', component: OverlayDemo},
   {name: 'SwitchDemo', component: SwitchDemo},
   {name: 'LinkDemo', component: LinkDemo},
   {name: 'DatePickerDemo', component: DatePickerDemo},

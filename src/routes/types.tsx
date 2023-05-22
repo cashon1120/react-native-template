@@ -14,7 +14,6 @@ export type RootStackParamList = {
   SpinningDemo: undefined;
   SwitchDemo: undefined;
   ModalDemo: undefined;
-  OverlayDemo: undefined;
   LinkDemo: undefined;
   DatePickerDemo: undefined;
   FlexDemo: undefined;
