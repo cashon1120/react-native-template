@@ -1,5 +1,6 @@
 import React, {FC, PropsWithChildren} from 'react';
 import {View, StyleSheet, ViewStyle} from 'react-native';
+import {FlexDirection, JustifyContent, AlignItems} from './types';
 
 /**
  * @interface ColProps
@@ -10,22 +11,16 @@ import {View, StyleSheet, ViewStyle} from 'react-native';
 
 interface ColProps {
   style?: ViewStyle | ViewStyle[];
-  alignItems?: 'center' | 'flex-start' | 'flex-end' | 'stretch';
-  direction?: 'row' | 'column';
-  justifyContent?:
-    | 'center'
-    | 'flex-start'
-    | 'flex-end'
-    | 'space-around'
-    | 'space-between'
-    | 'space-evenly';
+  alignItems?: AlignItems;
+  direction?: FlexDirection;
+  justifyContent?: JustifyContent;
   x?: number;
   y?: number;
 }
 interface RowProps
   extends Pick<
     ColProps,
-    'style' | 'x' | 'y' | 'alignItems' | 'justifyContent'
+    'style' | 'x' | 'y' | 'alignItems' | 'justifyContent' | 'direction'
   > {
   flexBox?: boolean;
   flex?: number;
@@ -43,22 +38,35 @@ const Col: FC<PropsWithChildren<ColProps>> = ({
   const _x = x ? x / 2 : 0;
   const _y = y ? y / 2 : 0;
   const newProps = {x: _x, y: _y};
-  let paddingStyles = {
+  let boxStyles = {
     paddingLeft: _x,
     paddingRight: _x,
     paddingTop: _y,
     paddingBottom: _y,
+    marginLeft: x ? -x : 0,
+    marginRight: x ? -x : 0,
+    marginTop: 0,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
   };
+  if (x) {
+    boxStyles.paddingHorizontal = _x;
+  }
+  if (y) {
+    boxStyles.paddingVertical = _y;
+  }
   const newChildren = React.Children.map(children, (child: any) => {
-    return React.cloneElement(child, newProps);
+    if (child.type.displayName === 'Row') {
+      return React.cloneElement(child, newProps);
+    }
   });
   return (
     <View
       style={[
         styles.wrapper,
-        paddingStyles,
         {alignItems, justifyContent, flexDirection: direction},
         style,
+        boxStyles,
       ]}>
       {newChildren}
     </View>
@@ -73,6 +81,7 @@ const Row: FC<PropsWithChildren<RowProps>> = ({
   flexBox,
   alignItems = 'flex-start',
   justifyContent = 'flex-start',
+  direction = 'row',
   flex,
 }) => {
   const marginStyles = {
@@ -87,13 +96,14 @@ const Row: FC<PropsWithChildren<RowProps>> = ({
       display: 'flex',
       alignItems,
       justifyContent,
+      flexDirection: direction,
     };
   }
   return (
     <View style={[{flex}, flexStyles, marginStyles, style]}>{children}</View>
   );
 };
-
+Row.displayName = 'Row';
 export {Col, Row};
 
 const styles = StyleSheet.create({

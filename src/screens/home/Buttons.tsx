@@ -15,7 +15,7 @@ const Buttons = () => {
     <FullScreenWrapper>
       <Header text="Button" />
       <FullScreenMain>
-        <ScrollView>
+        <ScrollView style={{paddingHorizontal: 15}}>
           <Col x={15} y={8}>
             <Row>
               <Button title="默认" onPress={() => {}} />

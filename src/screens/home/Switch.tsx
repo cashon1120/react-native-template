@@ -11,50 +11,52 @@ const SwitchDemo = () => {
   return (
     <>
       <Header text="Switch" />
-      <Col x={15} y={15}>
-        <Row direction="column">
-          <Text>large</Text>
-          <Switch
-            value={largeChecked}
-            size="large"
-            onChange={(value: boolean) => setLargeChecked(value)}
-          />
-        </Row>
-        <Row direction="column">
-          <Text>middle</Text>
-          <Switch
-            value={checked}
-            onChange={(value: boolean) => setChecked(value)}
-          />
-        </Row>
-        <Row direction="column">
-          <Text>small</Text>
-          <Switch
-            value={smallChecked}
-            size="small"
-            onChange={(value: boolean) => setSmallChecked(value)}
-          />
-        </Row>
-      </Col>
-      <Col x={15} direction="column" alignItems="flex-start" y={15}>
-        <Row alignItems="center">
-          <Switch
-            value={colorChecked}
-            activeColor="#1bc4a2"
-            onChange={(value: boolean) => setColorChecked(value)}
-          />
-          <Text style={{marginLeft: 10}}>activeColor: #1bc4a2</Text>
-        </Row>
-        <Row alignItems="center">
-          <Switch
-            value={true}
-            disabled
-            onChange={(value: boolean) => setColorChecked(value)}
-          />
-          <Text style={{marginLeft: 10}}>disabled</Text>
-        </Row>
-      </Col>
-      <View style={{height: 15}} />
+      <View style={{paddingHorizontal: 15, paddingTop: 15}}>
+        <Col x={25}>
+          <Row direction="column">
+            <Text>large</Text>
+            <Switch
+              value={largeChecked}
+              size="large"
+              onChange={(value: boolean) => setLargeChecked(value)}
+            />
+          </Row>
+          <Row direction="column">
+            <Text>middle</Text>
+            <Switch
+              value={checked}
+              onChange={(value: boolean) => setChecked(value)}
+            />
+          </Row>
+          <Row direction="column">
+            <Text>small</Text>
+            <Switch
+              value={smallChecked}
+              size="small"
+              onChange={(value: boolean) => setSmallChecked(value)}
+            />
+          </Row>
+        </Col>
+        <Col x={15} direction="column" alignItems="flex-start" y={15}>
+          <Row alignItems="center">
+            <Text>activeColor: #1bc4a2</Text>
+            <Switch
+              value={colorChecked}
+              activeColor="#1bc4a2"
+              onChange={(value: boolean) => setColorChecked(value)}
+            />
+          </Row>
+          <Row alignItems="center">
+            <Text>disabled</Text>
+            <Switch
+              value={true}
+              disabled
+              onChange={(value: boolean) => setColorChecked(value)}
+            />
+          </Row>
+        </Col>
+        <View style={{height: 15}} />
+      </View>
     </>
   );
 };

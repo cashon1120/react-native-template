@@ -14,7 +14,7 @@ const Index = () => {
         <ListItem label="Toast" to="ToastsDemo" info="轻提示" />
         <ListItem label="Tabs" to="TabsDemo" info="标签页" />
         <ListItem label="Spinning" to="SpinningDemo" info="加载效果" />
-        <ListItem label="BottomSheet" to="BottomSheetDemo" info="底部弹窗" />
+        <ListItem label="Modal" to="ModalDemo" info="模态框" />
         <ListItem label="Overlay" to="OverlayDemo" info="对话框" />
         <ListItem label="Switch" to="SwitchDemo" info="滑动开关" />
         <ListItem label="Link" to="LinkDemo" info="页面跳转" />

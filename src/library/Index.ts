@@ -13,7 +13,7 @@ import FullScreenWrapper, {FullScreenMain} from './FullScreenWrapper';
 import Tabs from './Tabs';
 import Spinning from './Spinning';
 import Mask from './Mask';
-import BottomSheet from './BottomSheet';
+import Modal from './Modal';
 import Overlay from './Overlay';
 import Switch from './Switch';
 import DatePicker from './DatePicker';
@@ -39,7 +39,7 @@ export {
   FullScreenMain,
   Tabs,
   Spinning,
-  BottomSheet,
+  Modal,
   Mask,
   Overlay,
   Switch,

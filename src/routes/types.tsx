@@ -13,7 +13,7 @@ export type RootStackParamList = {
   TabsDemo: undefined;
   SpinningDemo: undefined;
   SwitchDemo: undefined;
-  BottomSheetDemo: undefined;
+  ModalDemo: undefined;
   OverlayDemo: undefined;
   LinkDemo: undefined;
   DatePickerDemo: undefined;

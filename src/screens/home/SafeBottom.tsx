@@ -6,16 +6,13 @@ import {
   SafeBottom,
   FullScreenWrapper,
   FullScreenMain,
-  Text,
 } from '../../library/Index';
 
 const SafeBottomDemo = () => {
   return (
     <FullScreenWrapper>
       <Header text="Button" />
-      <FullScreenMain>
-        <Text>注意和FullScreenWrapper, FullScreenMainsg配合使用</Text>
-      </FullScreenMain>
+      <FullScreenMain />
       <SafeBottom>
         <View style={{padding: 15}}>
           <Button type="primary" title="确定" onPress={() => {}} />
