@@ -45,18 +45,19 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
   }
 
   setActiveIndex = (index: number, tabLength: number) => {
+    const {wrapperWidth, activeLineAnim, contentAnim} = this.state;
     const {onChange} = this.props;
     this.setState({
       activeIndex: index,
     });
     onChange && onChange(index);
-    Animated.timing(this.state.activeLineAnim, {
-      toValue: (this.state.wrapperWidth / tabLength) * index,
+    Animated.timing(activeLineAnim, {
+      toValue: (wrapperWidth / tabLength) * index,
       duration: 200,
       useNativeDriver: true,
     }).start();
-    Animated.timing(this.state.contentAnim, {
-      toValue: -this.state.wrapperWidth * index,
+    Animated.timing(contentAnim, {
+      toValue: -wrapperWidth * index,
       duration: 200,
       useNativeDriver: true,
     }).start();
@@ -65,8 +66,8 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
   componentDidMount() {
     const titles: string[] = [];
     const contents: React.ReactElement[] = [];
-    React.Children.map(this.props.children, child => {
-      if (child && child.props && child.props.title) {
+    React.Children.map(this.props.children, (child: any) => {
+      if (child && child.type.displayName === 'TabsItem') {
         titles.push(child.props.title);
         contents.push(child.props.children);
       }
@@ -145,6 +146,7 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
 
 export default Tabs;
 Tabs.Item = () => <></>;
+Tabs.Item.displayName = 'TabsItem';
 const styles = StyleSheet.create({
   title: {
     display: 'flex',
