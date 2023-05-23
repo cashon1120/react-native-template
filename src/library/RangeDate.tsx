@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Col, Row} from './Flex';
 import Text from './Text';
 import dayjs from 'dayjs';
@@ -11,11 +12,11 @@ export interface DateItem {
   month: number;
   year: number;
   selected: boolean;
+  disabled?: boolean;
 }
-
 export interface ReturnDate {
-  beginDate: DateItem;
-  endDate: DateItem;
+  beginDate: Omit<DateItem, 'selected'>;
+  endDate: Omit<DateItem, 'selected'>;
 }
 
 const weekdays = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
@@ -23,16 +24,18 @@ const width = Dimensions.get('window').width;
 const getMonthDates = (day: ReturnType<typeof dayjs>): DateItem[] => {
   const dates: DateItem[] = [];
   const startDay = day.date(0).day();
+  const preMonthEndDate = day.add(-1, 'month').endOf('month').date();
   const endDate = day.endOf('month').date();
   const month = day.month() + 1;
   const year = day.year();
   for (let i = 0; i < startDay; i++) {
     dates.push({
-      date: '',
+      date: preMonthEndDate - startDay + i + 1,
       timestamp: 0,
       month: 0,
       year: 0,
       selected: false,
+      disabled: true,
     });
   }
   for (let i = 1; i <= endDate; i++) {
@@ -44,7 +47,17 @@ const getMonthDates = (day: ReturnType<typeof dayjs>): DateItem[] => {
       selected: false,
     });
   }
-
+  const nextDatesLength = Math.ceil(dates.length / 7) * 7 - dates.length;
+  for (let i = 0; i < nextDatesLength; i++) {
+    dates.push({
+      date: i + 1,
+      timestamp: 0,
+      month: 0,
+      year: 0,
+      selected: false,
+      disabled: true,
+    });
+  }
   return dates;
 };
 
@@ -59,6 +72,8 @@ interface Props {
     beginDate?: string;
     endDate?: string;
   };
+  activeColor?: string;
+  activeBg?: string;
   minimumDate?: string; // 最小可选日期，如：2023-05-01
   maximumDate?: string; // 最大可选日期
   onChange: Function;
@@ -72,7 +87,13 @@ const getDate = (date?: string) => {
 };
 
 const RangeDate = (props: Props) => {
-  const {rangeDate, minimumDate, maximumDate} = props;
+  const {
+    rangeDate,
+    minimumDate,
+    maximumDate,
+    activeBg = '#466CF5',
+    activeColor = '#fff',
+  } = props;
   const [currentMonth, setCurrnetMonth] = useState(dayjs());
   const [minDate] = useState(getDate(minimumDate));
   const [maxDate] = useState(getDate(maximumDate));
@@ -90,6 +111,7 @@ const RangeDate = (props: Props) => {
 
   const handleSetDate = (date: DateItem) => {
     if (
+      date.disabled ||
       (maxDate && date.timestamp > maxDate) ||
       (minDate && date.timestamp < minDate)
     ) {
@@ -141,9 +163,13 @@ const RangeDate = (props: Props) => {
       endTime &&
       item.timestamp <= endTime.timestamp
     ) {
-      return styles.selected;
+      return {
+        backgroundColor: activeBg,
+        color: activeColor,
+      };
     }
     if (
+      item.disabled ||
       (minDate && item.timestamp < minDate) ||
       (maxDate && item.timestamp > maxDate)
     ) {
@@ -154,12 +180,10 @@ const RangeDate = (props: Props) => {
 
   return (
     <>
-      <Col style={[styles.week, {borderBottomWidth: 0}]}>
+      <Col style={[styles.week, {borderBottomWidth: 0}]} x={8}>
         <Row>
           <TouchableOpacity onPress={() => handleChangeMonth(-1)}>
-            <Text size={14} color="#666" style={styles.topButton}>
-              上一页
-            </Text>
+            <Icon name="chevron-back-outline" size={20} color="#999" />
           </TouchableOpacity>
         </Row>
         <Row flex={1} flexBox alignItems="center" justifyContent="center">
@@ -169,9 +193,7 @@ const RangeDate = (props: Props) => {
         </Row>
         <Row>
           <TouchableOpacity onPress={() => handleChangeMonth(1)}>
-            <Text size={14} color="#666" style={styles.topButton}>
-              下一页
-            </Text>
+            <Icon name="chevron-forward-outline" size={20} color="#999" />
           </TouchableOpacity>
         </Row>
       </Col>
@@ -213,7 +235,7 @@ export default RangeDate;
 
 const styles = StyleSheet.create({
   item: {
-    width: width / 7,
+    width: Math.floor(width - 2) / 7,
     marginTop: 2,
     overflow: 'hidden',
   },
@@ -229,10 +251,6 @@ const styles = StyleSheet.create({
   },
   topButton: {
     padding: 10,
-  },
-  selected: {
-    backgroundColor: '#466CF5',
-    color: '#fff',
   },
   begintDate: {
     borderTopLeftRadius: 5,
@@ -256,5 +274,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    paddingLeft: 1,
   },
 });

@@ -64,8 +64,8 @@ const Col: FC<PropsWithChildren<ColProps>> = ({
       style={[
         styles.wrapper,
         {alignItems, justifyContent, flexDirection: direction},
-        style,
         boxStyles,
+        style,
       ]}>
       {newChildren}
     </View>

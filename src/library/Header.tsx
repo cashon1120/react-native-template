@@ -8,9 +8,9 @@ import {
   LayoutChangeEvent,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {observer} from 'mobx-react';
 import {useStore} from '@/models/global';
-import Image from '@/library/Image';
 import StatusBar, {BarStypeProps} from '@/library/StatusBar';
 import Text from '@/library/Text';
 import globalStyle, {PRIMARY_COLOR} from '@/globalStyle';
@@ -41,7 +41,7 @@ const Header = (props: IProps) => {
   const navigation = useNavigation();
   const {
     text,
-    textColor,
+    textColor = '#fff',
     rightText,
     rightTextEvent,
     backEvent,
@@ -62,7 +62,7 @@ const Header = (props: IProps) => {
     }
     backEvent ? backEvent() : navigation?.goBack();
   };
-  const backUrl = barStyle === 'dark-content' ? 'back_black' : 'back_white';
+  const backIconColor = barStyle === 'dark-content' ? '#666' : '#fff';
   return (
     <View
       style={{
@@ -76,7 +76,9 @@ const Header = (props: IProps) => {
       onLayout={handleLayout}>
       <StatusBar barStyle={barStyle} translucent />
       <TouchableOpacity onPress={handleBack} style={styles.back}>
-        {!disableBack ? <Image name={backUrl} width={40} height={40} /> : null}
+        {!disableBack ? (
+          <Icon name="chevron-back" size={24} color={backIconColor} />
+        ) : null}
       </TouchableOpacity>
       <View
         style={[globalStyle.flex_1, globalStyle.flex_box_row, styles.header]}>
@@ -85,7 +87,7 @@ const Header = (props: IProps) => {
         ) : (
           <Text
             allowFontScaling={false}
-            style={{...styles.title, color: textColor || '#fff'}}>
+            style={{...styles.title, color: textColor}}>
             {text}
           </Text>
         )}

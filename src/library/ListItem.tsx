@@ -1,15 +1,8 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableHighlight,
-  Platform,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import useNavigation from '@/hooks/useNavigation';
 import {RootStackParamList} from '@/routes/types';
-
-import Image from './Image';
 
 /**
  * @interface Props
@@ -63,35 +56,31 @@ const ListItem = (props: Props) => {
     onPress && onPress();
   };
   return (
-    <View>
-      <TouchableHighlight underlayColor={underlayColor} onPress={handlePress}>
-        <View
-          style={{
-            ...styles.container,
-            borderBottomColor: hideLine ? '#fff' : '#eee',
-          }}>
-          <Text style={[styles.label, children ? {flex: 1} : null]}>
-            {label}
-          </Text>
-          {children ? (
-            children
-          ) : info || additionalInfo ? (
-            <>
-              {info ? <Text style={styles.info}>{info}</Text> : null}
-              {additionalInfo ? (
-                <Text style={styles.info}>{additionalInfo}</Text>
-              ) : null}
-            </>
-          ) : (
-            <Text style={styles.placeholder}>{placeholder}</Text>
-          )}
-          {showRedDot ? <View style={styles.redDot} /> : null}
-          {onPress || to ? (
-            <Image name="arrow" style={styles.arrow} width={30} height={30} />
-          ) : null}
-        </View>
-      </TouchableHighlight>
-    </View>
+    <TouchableHighlight underlayColor={underlayColor} onPress={handlePress}>
+      <View
+        style={{
+          ...styles.container,
+          borderBottomColor: hideLine ? '#fff' : '#eee',
+        }}>
+        <Text style={[styles.label, children ? {flex: 1} : null]}>{label}</Text>
+        {children ? (
+          children
+        ) : info || additionalInfo ? (
+          <>
+            {info ? <Text style={styles.info}>{info}</Text> : null}
+            {additionalInfo ? (
+              <Text style={styles.info}>{additionalInfo}</Text>
+            ) : null}
+          </>
+        ) : (
+          <Text style={styles.placeholder}>{placeholder}</Text>
+        )}
+        {showRedDot ? <View style={styles.redDot} /> : null}
+        {onPress || to ? (
+          <Icon name="chevron-forward" size={16} color="#999" />
+        ) : null}
+      </View>
+    </TouchableHighlight>
   );
 };
 
@@ -104,6 +93,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
     paddingHorizontal: 15,
+    paddingRight: 8,
     borderBottomColor: '#eee',
     borderBottomWidth: 1,
     minHeight: 46,
@@ -114,11 +104,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#E75120',
     marginLeft: 5,
-  },
-  icon: {
-    width: 20,
-    height: 20,
-    marginRight: 5,
   },
   label: {
     fontSize: 15,
@@ -140,10 +125,5 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     textAlign: 'right',
-  },
-  arrow: {
-    opacity: 0.6,
-    position: 'relative',
-    top: Platform.OS === 'android' ? 1 : 0,
   },
 });

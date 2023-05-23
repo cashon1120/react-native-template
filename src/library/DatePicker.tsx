@@ -19,6 +19,8 @@ interface Props {
     beginDate: string;
     endDate: string;
   };
+  rangeActiveColor?: string;
+  rangeActiveBg?: string;
 }
 
 const DateSelecte = (props: Props) => {
@@ -32,6 +34,8 @@ const DateSelecte = (props: Props) => {
     minimumDate,
     maximumDate,
     rangeDate,
+    rangeActiveColor,
+    rangeActiveBg,
   } = props;
   const getDate = (date?: string) => {
     if (!date || isNaN(Date.parse(date))) {
@@ -80,7 +84,12 @@ const DateSelecte = (props: Props) => {
             </Row>
           </Col>
           {mode === 'range' ? (
-            <RangeDate onChange={handleRangeDateChange} rangeDate={rangeDate} />
+            <RangeDate
+              onChange={handleRangeDateChange}
+              rangeDate={rangeDate}
+              activeColor={rangeActiveColor}
+              activeBg={rangeActiveBg}
+            />
           ) : (
             <DatePicker
               date={date}
