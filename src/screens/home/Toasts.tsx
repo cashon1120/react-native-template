@@ -8,25 +8,34 @@ const Toasts = () => {
       <Header text="Toast" />
       <View style={{padding: 15}}>
         <Button
-          title="top"
-          onPress={() => Toast.show('top', {position: 'top'})}
+          title="默认提示"
+          onPress={() => Toast.show('输入有误', {position: 'top'})}
         />
         <View style={{height: 15}} />
         <Button
-          title="center(default)"
-          onPress={() => Toast.show('center', {position: 'center'})}
+          title="警告"
+          onPress={() =>
+            Toast.show('输入有误', {position: 'top', type: 'warning'})
+          }
         />
         <View style={{height: 15}} />
         <Button
-          title="bottom"
-          onPress={() => Toast.show('bottom', {position: 'bottom'})}
+          title="成功"
+          onPress={() =>
+            Toast.show('提交成功', {position: 'center', type: 'success'})
+          }
+        />
+        <View style={{height: 15}} />
+        <Button
+          title="错误"
+          onPress={() =>
+            Toast.show('提交失败', {position: 'bottom', type: 'fail'})
+          }
         />
         <View style={{height: 15}} />
         <Button
           title="delay: 3000(default: 2000)"
-          onPress={() =>
-            Toast.show('center', {position: 'center', delay: 3000})
-          }
+          onPress={() => Toast.show('延迟', {position: 'center', delay: 3000})}
         />
       </View>
     </>
