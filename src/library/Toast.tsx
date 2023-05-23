@@ -7,7 +7,8 @@ import RootSiblings from 'react-native-root-siblings';
 
 type InfoType = 'success' | 'fail' | 'warning' | 'default';
 interface Params {
-  position: 'top' | 'center' | 'bottom';
+  position?: 'top' | 'center' | 'bottom';
+  iconType?: 'row' | 'column';
   type?: InfoType;
   delay?: number;
 }
@@ -15,7 +16,7 @@ interface Params {
 const colors = {
   success: '#47d382',
   fail: '#f77474',
-  warning: '#edaf12',
+  warning: '#fcb90f',
   default: '#333',
 };
 const getIconName = (type: InfoType) => {
@@ -34,7 +35,7 @@ let timer: ReturnType<typeof setTimeout>;
 let ele: any;
 const Toast = {
   show: (text: string, params?: Params) => {
-    const position = params ? params.position : 'center';
+    const position = (params && params.position) || 'center';
     const type = (params && params.type) || 'default';
     clearTimeout(timer);
     ele && ele.destroy();
@@ -45,12 +46,19 @@ const Toast = {
             distance={8}
             startColor="rgba(188,188,188, 0.3)"
             endColor="rgba(188,188,188, 0)">
-            <View style={[styles.textWrapper, {backgroundColor: colors[type]}]}>
+            <View
+              style={[
+                styles.textWrapper,
+                {
+                  backgroundColor: colors[type],
+                  flexDirection: params?.iconType || 'row',
+                },
+              ]}>
               {type === 'default' ? null : (
                 <Icon
-                  style={{marginBottom: 8, marginTop: 3, marginHorizontal: 15}}
+                  style={styles[params?.iconType || 'row']}
                   name={getIconName(type)}
-                  size={40}
+                  size={params?.iconType === 'column' ? 40 : 16}
                   color="#fff"
                 />
               )}
@@ -77,7 +85,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   top: {top: '15%'},
-  center: {top: '48%'},
+  center: {top: '45%'},
   bottom: {bottom: '5%'},
   textWrapper: {
     backgroundColor: '#fff',
@@ -88,8 +96,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  row: {marginRight: 5},
+  column: {marginBottom: 8, marginTop: 3, marginHorizontal: 15},
   text: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#fff',
   },
 });

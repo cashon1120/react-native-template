@@ -235,7 +235,7 @@ export default RangeDate;
 
 const styles = StyleSheet.create({
   item: {
-    width: Math.floor(width - 2) / 7,
+    width: Math.floor((width - 2) / 7),
     marginTop: 2,
     overflow: 'hidden',
   },

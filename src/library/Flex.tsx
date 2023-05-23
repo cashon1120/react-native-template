@@ -16,6 +16,7 @@ interface ColProps {
   justifyContent?: JustifyContent;
   x?: number;
   y?: number;
+  rowFlex?: number; // 传递给row的flex值，常用于row都需要统计设置成 flex: 1的时候
 }
 interface RowProps
   extends Pick<
@@ -34,10 +35,14 @@ const Col: FC<PropsWithChildren<ColProps>> = ({
   alignItems = 'center',
   justifyContent = 'flex-start',
   direction = 'row',
+  rowFlex,
 }) => {
   const _x = x ? x / 2 : 0;
   const _y = y ? y / 2 : 0;
-  const newProps = {x: _x, y: _y};
+  const newProps: any = {x: _x, y: _y};
+  if (rowFlex) {
+    newProps.flex = rowFlex;
+  }
   let boxStyles = {
     paddingLeft: _x,
     paddingRight: _x,
