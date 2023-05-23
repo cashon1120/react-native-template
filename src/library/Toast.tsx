@@ -13,7 +13,7 @@ interface Params {
 }
 
 const colors = {
-  success: '#5fce6d',
+  success: '#47d382',
   fail: '#f77474',
   warning: '#edaf12',
   default: '#333',

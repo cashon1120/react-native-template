@@ -11,30 +11,35 @@ const TabDemo = () => {
         <PlacehoderView height={15} />
         <Tabs onChange={(value: number) => setIndex(value)}>
           <Tabs.Item title="tab1">
-            <Text>tab1</Text>
+            <Text style={{paddingTop: 15, color: '#999'}}>tab1</Text>
           </Tabs.Item>
           <Tabs.Item title="tab2">
-            <Text>tab2</Text>
+            <Text style={{paddingTop: 15, color: '#999'}}>tab2</Text>
           </Tabs.Item>
         </Tabs>
 
         <PlacehoderView height={25} />
         <Tabs activeIndex={1}>
           <Tabs.Item title="tab1">
-            <Text>tab1</Text>
+            <Text style={{paddingTop: 15, color: '#999'}}>tab1</Text>
           </Tabs.Item>
           <Tabs.Item title="tab2">
-            <Text>activeIndex: 1</Text>
+            <Text style={{paddingTop: 15, color: '#999'}}>activeIndex: 1</Text>
+          </Tabs.Item>
+          <Tabs.Item title="tab3">
+            <Text style={{paddingTop: 15, color: '#999'}}>tab3</Text>
           </Tabs.Item>
         </Tabs>
 
         <PlacehoderView height={25} />
-        <Tabs activeColor="#2eb274">
+        <Tabs activeColor="#47d382">
           <Tabs.Item title="tab1">
-            <Text>activeColor: #2eb274</Text>
+            <Text style={{paddingTop: 15, color: '#999'}}>
+              activeColor: #47d382
+            </Text>
           </Tabs.Item>
           <Tabs.Item title="tab2">
-            <Text>2</Text>
+            <Text style={{paddingTop: 15, color: '#999'}}>2</Text>
           </Tabs.Item>
         </Tabs>
       </View>

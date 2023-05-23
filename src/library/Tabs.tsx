@@ -5,11 +5,10 @@ import {
   StyleSheet,
   TouchableOpacity,
   Animated,
-  Dimensions,
+  LayoutChangeEvent,
 } from 'react-native';
 import {PRIMARY_COLOR} from '@/globalStyle';
-
-const WINDOW_WIDTH = Dimensions.get('window').width;
+import {getComponentInfo} from '@/utils/commonUtils';
 
 interface TabsProps {
   children?: React.ReactElement[];
@@ -28,6 +27,7 @@ interface TabsState {
   contents: React.ReactElement[];
   activeLineAnim: any;
   contentAnim: any;
+  wrapperWidth: number;
 }
 
 class Tabs extends React.PureComponent<TabsProps, TabsState> {
@@ -40,6 +40,7 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
       contents: [],
       activeLineAnim: new Animated.Value(0),
       contentAnim: new Animated.Value(0),
+      wrapperWidth: 0,
     };
   }
 
@@ -50,12 +51,12 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
     });
     onChange && onChange(index);
     Animated.timing(this.state.activeLineAnim, {
-      toValue: (WINDOW_WIDTH / tabLength) * index,
+      toValue: (this.state.wrapperWidth / tabLength) * index,
       duration: 200,
       useNativeDriver: true,
     }).start();
     Animated.timing(this.state.contentAnim, {
-      toValue: -WINDOW_WIDTH * index,
+      toValue: -this.state.wrapperWidth * index,
       duration: 200,
       useNativeDriver: true,
     }).start();
@@ -85,8 +86,14 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
     const {activeIndex, titles, contents} = this.state;
     const {activeColor = PRIMARY_COLOR} = this.props;
     return (
-      <>
-        <View style={styles.title}>
+      <View style={{overflow: 'hidden'}}>
+        <View
+          onLayout={(e: LayoutChangeEvent) =>
+            this.setState({
+              wrapperWidth: getComponentInfo(e).width,
+            })
+          }
+          style={styles.title}>
           {titles.map((title: string, index: number) => (
             <TouchableOpacity
               key={title}
@@ -121,17 +128,17 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
           style={[
             styles.content_wrapper,
             {
-              width: titles.length * WINDOW_WIDTH,
+              width: titles.length * this.state.wrapperWidth,
               transform: [{translateX: this.state.contentAnim || 0}],
             },
           ]}>
           {contents.map((content: React.ReactElement, index: number) => (
-            <View style={styles.content} key={index}>
+            <View style={[styles.content]} key={index}>
               {content}
             </View>
           ))}
         </Animated.View>
-      </>
+      </View>
     );
   }
 }

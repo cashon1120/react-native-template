@@ -12,7 +12,7 @@ import Text from './Text';
 import {PRIMARY_COLOR} from '@/globalStyle';
 
 // 配置颜色
-const DANGER_COLOR = '#F35713';
+const DANGER_COLOR = '#f77474';
 const SAFE_COLOR = '#47d382';
 
 type ButtonType =
