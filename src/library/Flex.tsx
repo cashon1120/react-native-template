@@ -10,7 +10,7 @@ import {FlexDirection, JustifyContent, AlignItems} from './types';
  */
 
 interface ColProps {
-  style?: ViewStyle | ViewStyle[];
+  style?: ViewStyle | (ViewStyle | null)[] | null;
   alignItems?: AlignItems;
   direction?: FlexDirection;
   justifyContent?: JustifyContent;

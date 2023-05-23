@@ -17,12 +17,13 @@ import Modal from './Modal';
 import Overlay from './Overlay';
 import Switch from './Switch';
 import DatePicker from './DatePicker';
+import {ReturnDate} from './RangeDate';
 import Card from './Card';
 import {Col, Row} from './Flex';
 import PlacehoderView from './PlacehoderView';
 import Grid, {GridItem} from './Grid';
 import Picker from './Picker';
-
+export type DateItem = ReturnDate;
 export {
   FlatList,
   Button,
