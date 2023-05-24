@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View} from 'react-native';
 import {Grid, GridItem, Header, Text, PlacehoderView} from '@/library/Index';
 
 const GridDemo = () => {
@@ -8,68 +8,118 @@ const GridDemo = () => {
       <Header text="Grid" />
       <View style={{paddingHorizontal: 15}}>
         <PlacehoderView height={15} />
-        <Text size={16}>2列:</Text>
-        <Grid row={2} x={10} y={10}>
+        <Text size={16} color="#999">
+          间距
+        </Text>
+        {/* <Grid
+          row={3}
+          itemStyle={{backgroundColor: '#ddd'}}
+          ySpace={15}
+          xSpace={15}>
           <GridItem>
-            <View style={styles.wrapper}>
-              <Text>1</Text>
-            </View>
+            <Text>1</Text>
           </GridItem>
           <GridItem>
-            <View style={styles.wrapper}>
-              <Text>2</Text>
-            </View>
+            <Text>2</Text>
           </GridItem>
           <GridItem>
-            <View style={styles.wrapper}>
-              <Text>3</Text>
-            </View>
+            <Text>3</Text>
           </GridItem>
           <GridItem>
-            <View style={styles.wrapper}>
-              <Text>4</Text>
-            </View>
+            <Text>4</Text>
+          </GridItem>
+          <GridItem>
+            <Text>5</Text>
+          </GridItem>
+          <GridItem>
+            <Text>6</Text>
+          </GridItem>
+        </Grid> */}
+        <PlacehoderView height={15} />
+        <Text size={16} color="#999">
+          边框
+        </Text>
+        <Grid row={3} borderWidth={1} borderColor="#ddd">
+          <GridItem>
+            <Text>1</Text>
+          </GridItem>
+          <GridItem>
+            <Text>2</Text>
+          </GridItem>
+          <GridItem>
+            <Text>3</Text>
+          </GridItem>
+          <GridItem>
+            <Text>4</Text>
+          </GridItem>
+          <GridItem>
+            <Text>5</Text>
+          </GridItem>
+          <GridItem>
+            <Text>6</Text>
+          </GridItem>
+        </Grid>
+        {/* <PlacehoderView height={15} />
+        <Text size={16} color="#999">
+          子项统一Flex样式
+        </Text>
+        <Grid
+          row={3}
+          itemStyle={{height: 40}}
+          borderWidth={1}
+          borderColor="#ddd"
+          justifyContent="center"
+          alignItems="center">
+          <GridItem>
+            <Text>1</Text>
+          </GridItem>
+          <GridItem>
+            <Text>2</Text>
+          </GridItem>
+          <GridItem>
+            <Text>3</Text>
+          </GridItem>
+          <GridItem>
+            <Text>4</Text>
+          </GridItem>
+          <GridItem>
+            <Text>5</Text>
+          </GridItem>
+          <GridItem>
+            <Text>6</Text>
           </GridItem>
         </Grid>
         <PlacehoderView height={15} />
-        <Text size={16}>3列:</Text>
-        <Grid row={3} x={5} y={5}>
-          <GridItem>
-            <View style={styles.wrapper}>
-              <Text>1</Text>
-            </View>
+        <Text size={16} color="#999">
+          子项单独Flex样式
+        </Text>
+        <Grid
+          row={3}
+          borderWidth={1}
+          borderColor="#ddd"
+          itemStyle={{height: 50}}>
+          <GridItem alignItems="flex-start" justifyContent="flex-end">
+            <Text>1</Text>
+          </GridItem>
+          <GridItem alignItems="center">
+            <Text>2</Text>
+          </GridItem>
+          <GridItem alignItems="flex-end">
+            <Text>3</Text>
           </GridItem>
           <GridItem>
-            <View style={styles.wrapper}>
-              <Text>2</Text>
-            </View>
+            <Text>4</Text>
           </GridItem>
-          <GridItem>
-            <View style={styles.wrapper}>
-              <Text>3</Text>
-            </View>
+          <GridItem alignItems="center" justifyContent="center">
+            <Text>5</Text>
           </GridItem>
-          <GridItem>
-            <View style={styles.wrapper}>
-              <Text>4</Text>
-            </View>
+          <GridItem alignItems="flex-end" justifyContent="flex-end">
+            <Text>6</Text>
           </GridItem>
-          <GridItem>
-            <View style={styles.wrapper}>
-              <Text>5</Text>
-            </View>
-          </GridItem>
-        </Grid>
+        </Grid> */}
       </View>
     </>
   );
 };
 
 export default GridDemo;
-
-const styles = StyleSheet.create({
-  wrapper: {
-    height: 40,
-    backgroundColor: '#ddd',
-  },
-});

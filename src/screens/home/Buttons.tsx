@@ -16,12 +16,12 @@ const Buttons = () => {
       <Header text="Button" />
       <FullScreenMain>
         <ScrollView style={{paddingHorizontal: 15}}>
-          <Col x={15} y={8}>
+          <Col space={15} style={{paddingTop: 15}}>
             <Row>
               <Button title="默认" onPress={() => {}} />
             </Row>
           </Col>
-          <Col x={15} y={8}>
+          <Col space={15} style={{paddingTop: 15}}>
             <Row>
               <Button type="primary" title="primary" onPress={() => {}} />
             </Row>
@@ -33,7 +33,7 @@ const Buttons = () => {
               />
             </Row>
           </Col>
-          <Col x={15} y={8}>
+          <Col space={15} style={{paddingTop: 15}}>
             <Row>
               <Button type="danger" title="danger" onPress={() => {}} />
             </Row>
@@ -45,8 +45,7 @@ const Buttons = () => {
               />
             </Row>
           </Col>
-
-          <Col x={15} y={8}>
+          <Col space={15} style={{paddingTop: 15}}>
             <Row>
               <Button type="safe" title="safe" onPress={() => {}} />
             </Row>
@@ -54,8 +53,7 @@ const Buttons = () => {
               <Button type="safe-line" title="safe-line" onPress={() => {}} />
             </Row>
           </Col>
-
-          <Col x={15} y={8}>
+          <Col space={15} style={{paddingTop: 15}}>
             <Row>
               <Button
                 type="primary"
@@ -91,7 +89,7 @@ const Buttons = () => {
               />
             </Row>
           </Col>
-          <Col x={15} y={8}>
+          <Col space={15} style={{paddingTop: 15}}>
             <Row>
               <Button
                 type="primary"

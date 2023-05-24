@@ -59,7 +59,7 @@ const LinkDemo = () => {
         <PlacehoderView height={15} />
         <Text>Row 继承 Col 部分属性，但多了flex</Text>
         <Col style={styles.col} justifyContent="center">
-          <Row style={styles.row} flex={1}>
+          <Row style={styles.row} flex={1} alignItems="center">
             <Text color="#fff">flex: 1</Text>
           </Row>
           <Row style={styles.row} />
@@ -67,7 +67,7 @@ const LinkDemo = () => {
         </Col>
         <PlacehoderView height={15} />
         <Text>设置间隔： x: 15</Text>
-        <Col x={15} style={styles.col} justifyContent="center">
+        <Col space={15} style={styles.col} justifyContent="center">
           <Row style={styles.row} flex={1} />
           <Row style={styles.row} flex={1} />
           <Row style={styles.row} flex={1} />
@@ -75,15 +75,16 @@ const LinkDemo = () => {
 
         <Text>derection: column</Text>
         <Col
-          y={15}
+          space={15}
           style={styles.col}
           justifyContent="center"
           alignItems="flex-start"
-          direction="column">
+          flexDirection="column">
           <Row style={styles.row} flex={1} />
           <Row style={styles.row} flex={1} />
           <Row style={styles.row} flex={1} />
         </Col>
+        <PlacehoderView height={30} />
       </ScrollView>
     </>
   );

@@ -21,6 +21,7 @@ export type RootStackParamList = {
   GridDemo: undefined;
   PickerDemo: undefined;
   SwiperDemo: undefined;
+  IconDemo: undefined;
 
   Setting: undefined;
 };

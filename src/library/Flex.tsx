@@ -1,7 +1,7 @@
 import React, {FC, PropsWithChildren} from 'react';
 import {View, StyleSheet, ViewStyle} from 'react-native';
-import {FlexDirection, JustifyContent, AlignItems} from './types';
-
+import {FlexDirection, JustifyContent, AlignItems, FlexStyle} from './types';
+import {getFlexStyle} from './utils';
 /**
  * @interface ColProps
  * @property style 样式
@@ -9,66 +9,81 @@ import {FlexDirection, JustifyContent, AlignItems} from './types';
  * @property y 纵向间隔
  */
 
-interface ColProps {
+export interface ColProps {
   style?: ViewStyle | (ViewStyle | null)[] | null;
+  itemStyle?: ViewStyle;
   alignItems?: AlignItems;
-  direction?: FlexDirection;
+  flexDirection?: FlexDirection;
   justifyContent?: JustifyContent;
-  x?: number;
-  y?: number;
+  space?: number;
   rowFlex?: number; // 传递给row的flex值，常用于row都需要统计设置成 flex: 1的时候
 }
 interface RowProps
   extends Pick<
     ColProps,
-    'style' | 'x' | 'y' | 'alignItems' | 'justifyContent' | 'direction'
+    'style' | 'space' | 'alignItems' | 'justifyContent' | 'flexDirection'
   > {
   flexBox?: boolean;
   flex?: number;
+  parentFlexDirection?: FlexDirection;
+  isLastItem?: boolean;
 }
 
 const Col: FC<PropsWithChildren<ColProps>> = ({
   style,
-  x,
-  y,
+  space,
   children,
+  itemStyle,
   alignItems = 'center',
   justifyContent = 'flex-start',
-  direction = 'row',
+  flexDirection = 'row',
   rowFlex,
 }) => {
-  const _x = x ? x / 2 : 0;
-  const _y = y ? y / 2 : 0;
-  const newProps: any = {x: _x, y: _y};
+  const _space = space ? space / 2 : 0;
+  const newProps: any = {space: _space};
   if (rowFlex) {
     newProps.flex = rowFlex;
   }
-  let boxStyles = {
-    paddingLeft: _x,
-    paddingRight: _x,
-    paddingTop: _y,
-    paddingBottom: _y,
-    marginLeft: x ? -x : 0,
-    marginRight: x ? -x : 0,
-    paddingHorizontal: 0,
-    paddingVertical: 0,
-  };
-  if (x) {
-    boxStyles.paddingHorizontal = _x;
-  }
-  if (y) {
-    boxStyles.paddingVertical = _y;
+  let boxStyles: any = {};
+  if (space) {
+    if (flexDirection === 'row') {
+      boxStyles = {
+        paddingLeft: _space,
+        paddingRight: _space,
+        marginLeft: space ? -space : 0,
+        marginRight: space ? -space : 0,
+        paddingHorizontal: _space,
+      };
+    }
   }
   const newChildren = React.Children.map(children, (child: any) => {
     if (child.type.displayName === 'Row') {
-      return React.cloneElement(child, newProps);
+      let itemFlexStyles: FlexStyle = getFlexStyle(child.props);
+      return React.cloneElement(child, {
+        ...newProps,
+        style: {
+          ...itemStyle,
+          ...child.props.style,
+        },
+        ...itemFlexStyles,
+        ...child.props.style,
+        parentFlexDirection: flexDirection,
+      });
     }
   });
+  if (newChildren) {
+    const lastRow = newChildren[newChildren?.length - 1];
+    newChildren[newChildren?.length - 1] = React.cloneElement(lastRow, {
+      ...lastRow.props,
+      isLastItem: true,
+    });
+  }
+
   return (
     <View
       style={[
         styles.wrapper,
-        {alignItems, justifyContent, flexDirection: direction},
+        {alignItems, justifyContent, flexDirection},
         boxStyles,
         style,
       ]}>
@@ -77,32 +92,27 @@ const Col: FC<PropsWithChildren<ColProps>> = ({
   );
 };
 
-const Row: FC<PropsWithChildren<RowProps>> = ({
-  style,
-  x,
-  y,
-  children,
-  flexBox,
-  alignItems = 'flex-start',
-  justifyContent = 'flex-start',
-  direction = 'row',
-  flex,
-}) => {
-  const marginStyles = {
-    marginLeft: x,
-    marginRight: x,
-    marginTop: y,
-    marginBottom: y,
-  };
-  let flexStyles: any = {};
-  if (flexBox) {
-    flexStyles = {
-      display: 'flex',
-      alignItems,
-      justifyContent,
-      flexDirection: direction,
+const Row: FC<PropsWithChildren<RowProps>> = props => {
+  const {
+    style,
+    space = 0,
+    children,
+    parentFlexDirection,
+    flex,
+    isLastItem,
+  } = props;
+  let marginStyles: any = {};
+  if (parentFlexDirection === 'row') {
+    marginStyles = {
+      marginLeft: space,
+      marginRight: space,
+    };
+  } else {
+    marginStyles = {
+      marginBottom: isLastItem ? 0 : space * 2,
     };
   }
+  let flexStyles: FlexStyle = getFlexStyle(props);
   return (
     <View style={[{flex}, flexStyles, marginStyles, style]}>{children}</View>
   );

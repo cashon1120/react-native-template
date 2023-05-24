@@ -7,3 +7,9 @@ export type JustifyContent =
   | 'space-around'
   | 'space-between'
   | 'space-evenly';
+export type FlexStyle = {
+  display?: 'flex';
+  alignItems?: AlignItems;
+  justifyContent?: JustifyContent;
+  flexDirection?: FlexDirection;
+};
