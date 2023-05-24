@@ -31,7 +31,11 @@ const getMonthDates = (day: ReturnType<typeof dayjs>): DateItem[] => {
   for (let i = 0; i < startDay; i++) {
     dates.push({
       date: preMonthEndDate - startDay + i + 1,
-      timestamp: 0,
+      timestamp: day
+        .startOf('month')
+        .add(-(i + 1), 'day')
+        .startOf('day')
+        .valueOf(),
       month: 0,
       year: 0,
       selected: false,
@@ -41,7 +45,7 @@ const getMonthDates = (day: ReturnType<typeof dayjs>): DateItem[] => {
   for (let i = 1; i <= endDate; i++) {
     dates.push({
       date: i,
-      timestamp: dayjs(`${year}-${month}-${i}`).valueOf(),
+      timestamp: dayjs(`${year}-${month}-${i}`).startOf('day').valueOf(),
       year,
       month,
       selected: false,
@@ -51,7 +55,11 @@ const getMonthDates = (day: ReturnType<typeof dayjs>): DateItem[] => {
   for (let i = 0; i < nextDatesLength; i++) {
     dates.push({
       date: i + 1,
-      timestamp: 0,
+      timestamp: day
+        .endOf('month')
+        .add(i + 1, 'day')
+        .startOf('day')
+        .valueOf(),
       month: 0,
       year: 0,
       selected: false,
@@ -163,10 +171,15 @@ const RangeDate = (props: Props) => {
       endTime &&
       item.timestamp <= endTime.timestamp
     ) {
-      return {
+      const style = {
         backgroundColor: activeBg,
         color: activeColor,
+        opacity: 1,
       };
+      if (item.disabled) {
+        style.opacity = 0.7;
+      }
+      return style;
     }
     if (
       item.disabled ||
@@ -180,9 +193,11 @@ const RangeDate = (props: Props) => {
 
   return (
     <>
-      <Col style={[styles.week, {borderBottomWidth: 0}]} x={8}>
+      <Col style={[styles.row, {borderBottomWidth: 0}]}>
         <Row>
-          <TouchableOpacity onPress={() => handleChangeMonth(-1)}>
+          <TouchableOpacity
+            style={styles.topButton}
+            onPress={() => handleChangeMonth(-1)}>
             <Icon name="chevron-back-outline" size={20} color="#999" />
           </TouchableOpacity>
         </Row>
@@ -192,15 +207,17 @@ const RangeDate = (props: Props) => {
           </Text>
         </Row>
         <Row>
-          <TouchableOpacity onPress={() => handleChangeMonth(1)}>
+          <TouchableOpacity
+            style={styles.topButton}
+            onPress={() => handleChangeMonth(1)}>
             <Icon name="chevron-forward-outline" size={20} color="#999" />
           </TouchableOpacity>
         </Row>
       </Col>
-      <Col style={styles.week}>
+      <Col style={styles.row}>
         {weekdays.map(item => (
           <Row key={item} flexBox justifyContent="center" style={styles.item}>
-            <Text style={[styles.itemText]} color="#666">
+            <Text style={[styles.itemText]} color="#999">
               {item}
             </Text>
           </Row>
@@ -219,7 +236,9 @@ const RangeDate = (props: Props) => {
                 : null,
             ]}
             key={index}>
-            <TouchableOpacity onPress={() => handleSetDate(item)}>
+            <TouchableOpacity
+              activeOpacity={item.disabled ? 1 : 0.7}
+              onPress={() => handleSetDate(item)}>
               <Text style={[styles.itemText, getStateStyle(item)]}>
                 {item.date}
               </Text>
@@ -263,7 +282,7 @@ const styles = StyleSheet.create({
   disabled: {
     color: '#ccc',
   },
-  week: {
+  row: {
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderTopColor: '#eee',
