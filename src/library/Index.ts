@@ -23,9 +23,12 @@ import {Col, Row} from './Flex';
 import PlacehoderView from './PlacehoderView';
 import Grid, {GridItem} from './Grid';
 import Picker from './Picker';
+import Swiper, {SwiperItem} from './Swiper';
 export type DateItem = ReturnDate;
 export {
   FlatList,
+  Swiper,
+  SwiperItem,
   Button,
   Header,
   Image,
