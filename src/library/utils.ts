@@ -12,6 +12,9 @@ export const getFlexStyle = (props: any): FlexStyle => {
     if (key === 'flexBox') {
       if (props[key]) {
         style.display = 'flex';
+        // 默认设置为 row
+        style.flexDirection = 'row';
+        style.alignItems = 'center';
       }
     } else {
       if (props[key]) {

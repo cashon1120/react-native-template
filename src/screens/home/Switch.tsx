@@ -12,8 +12,8 @@ const SwitchDemo = () => {
     <>
       <Header text="Switch" />
       <View style={{paddingHorizontal: 15, paddingTop: 15}}>
-        <Col x={25}>
-          <Row direction="column">
+        <Col space={25}>
+          <Row flexDirection="column">
             <Text>large</Text>
             <Switch
               value={largeChecked}
@@ -21,14 +21,14 @@ const SwitchDemo = () => {
               onChange={(value: boolean) => setLargeChecked(value)}
             />
           </Row>
-          <Row direction="column">
+          <Row flexDirection="column">
             <Text>middle</Text>
             <Switch
               value={checked}
               onChange={(value: boolean) => setChecked(value)}
             />
           </Row>
-          <Row direction="column">
+          <Row flexDirection="column">
             <Text>small</Text>
             <Switch
               value={smallChecked}
@@ -37,7 +37,7 @@ const SwitchDemo = () => {
             />
           </Row>
         </Col>
-        <Col x={15} direction="column" alignItems="flex-start" y={15}>
+        <Col space={15} flexDirection="column" alignItems="flex-start">
           <Row alignItems="center">
             <Text>activeColor: #1bc4a2</Text>
             <Switch

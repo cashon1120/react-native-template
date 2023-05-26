@@ -45,7 +45,7 @@ const BottomSheetDemo = () => {
   return (
     <>
       <Header text="DatePicker" />
-      <Col direction="column" x={15} y={15}>
+      <Col flexDirection="column" space={15}>
         <Row>
           <Button
             title={`选择日期 ${date1}`}
