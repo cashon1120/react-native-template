@@ -66,7 +66,6 @@ const Col: FC<PropsWithChildren<ColProps>> = ({
           ...child.props.style,
         },
         ...itemFlexStyles,
-        ...child.props.style,
         parentFlexDirection: flexDirection,
       });
     }
@@ -74,7 +73,7 @@ const Col: FC<PropsWithChildren<ColProps>> = ({
   if (newChildren) {
     const lastRow = newChildren[newChildren?.length - 1];
     newChildren[newChildren?.length - 1] = React.cloneElement(lastRow, {
-      ...lastRow.props,
+      ...lastRow?.props,
       isLastItem: true,
     });
   }

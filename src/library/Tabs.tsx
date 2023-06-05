@@ -5,20 +5,18 @@ import {
   StyleSheet,
   TouchableOpacity,
   Animated,
-  LayoutChangeEvent,
+  Dimensions,
 } from 'react-native';
-import {PRIMARY_COLOR} from '@/globalStyle';
-import {getComponentInfo} from '@/utils/commonUtils';
 
-interface TabsProps {
-  children?: React.ReactElement[];
-  activeIndex?: number;
-  activeColor?: string;
-  onChange?: (index: number) => void;
-}
+const WINDOW_WIDTH = Dimensions.get('window').width;
 
 interface ItemProps {
   title: string;
+}
+
+interface TabsProps {
+  children?: React.ReactElement[];
+  active?: number;
 }
 
 interface TabsState {
@@ -27,7 +25,6 @@ interface TabsState {
   contents: React.ReactElement[];
   activeLineAnim: any;
   contentAnim: any;
-  wrapperWidth: number;
 }
 
 class Tabs extends React.PureComponent<TabsProps, TabsState> {
@@ -35,30 +32,26 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
   constructor(props: TabsProps) {
     super(props);
     this.state = {
-      activeIndex: props.activeIndex || 0,
+      activeIndex: props.active || 0,
       titles: [],
       contents: [],
       activeLineAnim: new Animated.Value(0),
       contentAnim: new Animated.Value(0),
-      wrapperWidth: 0,
     };
   }
 
   setActiveIndex = (index: number, tabLength: number) => {
-    const {wrapperWidth, activeLineAnim, contentAnim} = this.state;
-    const {onChange} = this.props;
     this.setState({
       activeIndex: index,
     });
-    onChange && onChange(index);
-    Animated.timing(activeLineAnim, {
-      toValue: (wrapperWidth / tabLength) * index,
+    Animated.timing(this.state.activeLineAnim, {
+      toValue: (WINDOW_WIDTH / tabLength) * index,
       duration: 200,
       useNativeDriver: true,
     }).start();
-    Animated.timing(contentAnim, {
-      toValue: -wrapperWidth * index,
-      duration: 200,
+    Animated.timing(this.state.contentAnim, {
+      toValue: -WINDOW_WIDTH * index,
+      duration: 100,
       useNativeDriver: true,
     }).start();
   };
@@ -69,7 +62,6 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
     React.Children.map(this.props.children, (child: any) => {
       if (child && child.type.displayName === 'TabsItem') {
         titles.push(child.props.title);
-        contents.push(child.props.children);
       }
     });
     this.setState(
@@ -78,23 +70,22 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
         contents,
       },
       () => {
-        this.setActiveIndex(this.props.activeIndex || 0, titles.length);
+        this.setActiveIndex(this.props.active || 0, titles.length);
       },
     );
   }
 
   render(): React.ReactNode {
-    const {activeIndex, titles, contents} = this.state;
-    const {activeColor = PRIMARY_COLOR} = this.props;
+    const {activeIndex, titles} = this.state;
+    const contents: React.ReactElement[] = [];
+    React.Children.map(this.props.children, (child: any) => {
+      if (child && child.type.displayName === 'TabsItem') {
+        contents.push(child.props.children);
+      }
+    });
     return (
-      <View style={{overflow: 'hidden'}}>
-        <View
-          onLayout={(e: LayoutChangeEvent) =>
-            this.setState({
-              wrapperWidth: getComponentInfo(e).width,
-            })
-          }
-          style={styles.title}>
+      <>
+        <View style={styles.title}>
           {titles.map((title: string, index: number) => (
             <TouchableOpacity
               key={title}
@@ -107,7 +98,7 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
                 <Text
                   style={[
                     styles.title_text,
-                    activeIndex === index ? {color: activeColor} : null,
+                    activeIndex === index ? styles.active_text : null,
                   ]}>
                   {title}
                 </Text>
@@ -122,54 +113,55 @@ class Tabs extends React.PureComponent<TabsProps, TabsState> {
                 transform: [{translateX: this.state.activeLineAnim || 0}],
               },
             ]}>
-            <View style={[styles.active_in, {backgroundColor: activeColor}]} />
+            <View style={styles.active_in} />
           </Animated.View>
         </View>
         <Animated.View
           style={[
             styles.content_wrapper,
             {
-              width: titles.length * this.state.wrapperWidth,
+              width: titles.length * WINDOW_WIDTH,
               transform: [{translateX: this.state.contentAnim || 0}],
             },
           ]}>
           {contents.map((content: React.ReactElement, index: number) => (
-            <View style={[styles.content]} key={index}>
+            <View style={styles.content} key={index}>
               {content}
             </View>
           ))}
         </Animated.View>
-      </View>
+      </>
     );
   }
 }
 
-export default Tabs;
 Tabs.Item = () => <></>;
 Tabs.Item.displayName = 'TabsItem';
+
+export default Tabs;
+
 const styles = StyleSheet.create({
   title: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomColor: '#ddd',
-    borderBottomWidth: 1,
+    height: 40,
   },
   tab_title: {
     flex: 1,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 15,
+    paddingVertical: 10,
   },
   active: {},
   title_text: {
     fontSize: 14,
-    fontWeight: '600',
-    color: '#666',
+    color: '#fff',
   },
   active_text: {
-    color: PRIMARY_COLOR,
+    color: '#fff',
+    fontWeight: '600',
   },
   active_out: {
     position: 'absolute',
@@ -179,9 +171,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   active_in: {
-    width: '60%',
-    height: 2,
-    backgroundColor: PRIMARY_COLOR,
+    width: '50%',
+    height: 3,
+    backgroundColor: '#fff',
   },
   content_wrapper: {
     display: 'flex',

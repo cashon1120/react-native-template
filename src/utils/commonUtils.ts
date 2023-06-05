@@ -28,7 +28,7 @@ export const setUISize = (width: number, height?: number) => {
 };
 
 // 获取Bar高度
-export const getBarHeight = () => {
+export const getBarHeight = (): Promise<number> => {
   return new Promise(resolve => {
     const {StatusBarManager} = NativeModules;
     if (Platform.OS === 'ios') {

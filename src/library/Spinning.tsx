@@ -5,13 +5,16 @@ import RootSiblings from 'react-native-root-siblings';
 
 class Spinning {
   ele: RootSiblings | null;
+  status: boolean;
   constructor() {
     this.ele = null;
+    this.status = false;
   }
   show(text?: string) {
     if (this.ele) {
       this.ele.destroy();
     }
+    this.status = true;
     this.ele = new RootSiblings(
       (
         <View style={[styles.wrapper]}>
@@ -24,6 +27,7 @@ class Spinning {
   clear() {
     this.ele?.destroy();
     this.ele = null;
+    this.status = false;
   }
 }
 

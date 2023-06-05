@@ -6,16 +6,16 @@ import {getFlexStyle} from './utils';
 
 type Flex = Pick<
   ColProps,
-  'style' | 'alignItems' | 'justifyContent' | 'flexDirection'
+  'style' | 'alignItems' | 'justifyContent' | 'flexDirection' | 'itemStyle'
 >;
 interface Props extends Flex {
   row?: number;
   xSpace?: number;
   ySpace?: number;
-  style?: ViewStyle;
-  itemStyle?: ViewStyle;
   borderWidth?: number;
   borderColor?: string;
+  square?: boolean;
+  onLayout?: (size: number) => void;
 }
 
 const Grid: FC<PropsWithChildren<Props>> = ({
@@ -30,6 +30,8 @@ const Grid: FC<PropsWithChildren<Props>> = ({
   ySpace = 0,
   borderWidth = 0,
   borderColor = '#ddd',
+  square,
+  onLayout,
 }) => {
   const _xSpace = xSpace ? xSpace / 2 : 0;
   const _ySpace = ySpace ? ySpace / 2 : 0;
@@ -47,7 +49,9 @@ const Grid: FC<PropsWithChildren<Props>> = ({
   const [itemWidth, setItemWidth] = useState(0);
   const handleLayout = (e: LayoutChangeEvent) => {
     const wrapperWidth = e.nativeEvent.layout.width;
-    setItemWidth((wrapperWidth - borderWidth - xSpace * (row - 1)) / row);
+    const width = (wrapperWidth - borderWidth - xSpace * (row - 1)) / row;
+    setItemWidth(width);
+    onLayout && onLayout(width);
   };
 
   const newChildren = React.Children.map(children, (child: any) => {
@@ -55,6 +59,7 @@ const Grid: FC<PropsWithChildren<Props>> = ({
       let itemFlexStyles: FlexStyle = getFlexStyle(child.props);
       return React.cloneElement(child, {
         width: itemWidth,
+        height: square ? itemWidth : 'auto',
         ...newProps,
         ...flexStyles,
         ...itemFlexStyles,
@@ -104,12 +109,14 @@ const Grid: FC<PropsWithChildren<Props>> = ({
 interface ItemProps extends Flex {
   flexBox?: boolean;
   width?: string;
+  height?: number;
   flex?: number;
   style?: ViewStyle;
 }
 export const GridItem: FC<PropsWithChildren<ItemProps>> = ({
   children,
   width,
+  height,
   alignItems,
   justifyContent,
   flexBox,
@@ -125,7 +132,7 @@ export const GridItem: FC<PropsWithChildren<ItemProps>> = ({
       flexDirection,
     };
   }
-  return <View style={[{width}, flexStyles, style]}>{children}</View>;
+  return <View style={[{width, height}, flexStyles, style]}>{children}</View>;
 };
 GridItem.displayName = 'GridItem';
 export default Grid;

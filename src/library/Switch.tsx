@@ -1,42 +1,38 @@
-import React, {useRef, useEffect} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useRef, useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
   Animated,
   TouchableWithoutFeedback,
 } from 'react-native';
+import {SwitchProps} from './types';
 import {PRIMARY_COLOR} from '@/globalStyle';
 
-interface Props {
-  onChange: (value: boolean) => void;
-  value: boolean;
-  disabled?: boolean;
-  activeColor?: string;
-  size?: 'large' | 'middle' | 'small';
-}
-
-const Switch = (props: Props) => {
+const Switch = (props: SwitchProps) => {
   const {
-    size = 'middle',
+    size = 'default',
     activeColor = PRIMARY_COLOR,
-    value,
+    defaultValue,
     disabled,
     onChange,
   } = props;
+  const [value, setValue] = useState<boolean>();
+  useEffect(() => {
+    setValue(defaultValue ? true : false);
+  }, []);
   const getValue = (): number => {
     if (!value) {
       return 1;
     }
-    if (size === 'large') {
-      return 65 - 30;
+    if (size === 'default') {
+      return 60 - 27;
     }
-    if (size === 'middle') {
-      return 55 - 25;
-    }
-    return 45 - 21;
+    return 50 - 23;
   };
   const dottedAnim = useRef(new Animated.Value(getValue())).current;
   const handleToggleValue = () => {
+    setValue(!value);
     onChange(!value);
   };
 
@@ -46,7 +42,6 @@ const Switch = (props: Props) => {
       duration: 200,
       useNativeDriver: true,
     }).start();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   return (
@@ -81,34 +76,24 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 1,
   },
-  large: {
-    width: 65,
-    height: 30,
-    borderRadius: 25,
-  },
-  'dotted-large': {
-    width: 28,
+  default: {
+    width: 60,
     height: 28,
     borderRadius: 25,
   },
-  middle: {
-    width: 55,
+  'dotted-default': {
+    width: 26,
     height: 26,
-    borderRadius: 23,
-  },
-  'dotted-middle': {
-    width: 24,
-    height: 24,
     borderRadius: 13,
   },
   small: {
-    width: 45,
-    height: 22,
-    borderRadius: 23,
+    width: 50,
+    height: 24,
+    borderRadius: 20,
   },
   'dotted-small': {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+    width: 22,
+    height: 22,
+    borderRadius: 13,
   },
 });

@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Shadow} from 'react-native-shadow-2';
-
 import Icon from 'react-native-vector-icons/AntDesign';
 import RootSiblings from 'react-native-root-siblings';
 
@@ -9,8 +8,8 @@ type InfoType = 'success' | 'fail' | 'warning' | 'default';
 interface Params {
   position?: 'top' | 'center' | 'bottom';
   iconType?: 'row' | 'column';
-  type?: InfoType;
   delay?: number;
+  disableShadow?: boolean;
 }
 
 const colors = {
@@ -33,17 +32,17 @@ const getIconName = (type: InfoType) => {
 };
 let timer: ReturnType<typeof setTimeout>;
 let ele: any;
-const Toast = {
-  show: (text: string, params?: Params) => {
+class Toast {
+  static createElement = (text: string, params?: Params, type?: InfoType) => {
     const position = (params && params.position) || 'center';
-    const type = (params && params.type) || 'default';
+    type = type || 'default';
     clearTimeout(timer);
     ele && ele.destroy();
     ele = new RootSiblings(
       (
         <View style={[styles.wrapper, styles[position]]}>
           <Shadow
-            distance={8}
+            distance={params?.disableShadow ? 0 : 8}
             startColor="rgba(188,188,188, 0.3)"
             endColor="rgba(188,188,188, 0)">
             <View
@@ -71,10 +70,22 @@ const Toast = {
     timer = setTimeout(() => {
       ele.destroy();
     }, params?.delay || 2000);
-  },
-};
+  };
+  show = (text: string, params?: Params) => {
+    Toast.createElement(text, params, 'default');
+  };
+  success = (text: string, params?: Params) => {
+    Toast.createElement(text, params, 'success');
+  };
+  warning = (text: string, params?: Params) => {
+    Toast.createElement(text, params, 'warning');
+  };
+  fail = (text: string, params?: Params) => {
+    Toast.createElement(text, params, 'fail');
+  };
+}
 
-export default Toast;
+export default new Toast();
 
 const styles = StyleSheet.create({
   wrapper: {

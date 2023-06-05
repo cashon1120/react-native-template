@@ -1,68 +1,107 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useEffect, useRef, FC, PropsWithChildren} from 'react';
 import {View, StyleSheet, Text, TouchableOpacity, Platform} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import DatePicker from 'react-native-date-picker';
+import dayjs from 'dayjs';
 import {Col, Row} from './Flex';
 import Modal from './Modal';
-import RangeDate from './RangeDate';
+import TextInput from './TextInput';
+import {DateMode} from './types';
+import {isValidDate} from './utils';
 import globalStyle, {PRIMARY_COLOR} from '@/globalStyle';
-
+// import {DatePickerProps} from './types';
 interface Props {
-  visible: boolean;
-  onCancel: Function;
+  onCancel?: Function;
   onChange: Function;
-  defaultDate?: string; // 默认日期
-  minimumDate?: string; // 最小可选日期，如：2023-05-01
-  maximumDate?: string; // 最大可选日期
-  title?: string; // 标题
-  mode?: 'datetime' | 'date' | 'time' | 'range';
-  rangeDate?: {
-    beginDate: string;
-    endDate: string;
-  };
-  rangeActiveColor?: string;
-  rangeActiveBg?: string;
+  defaultDate?: string;
+  minimumDate?: string;
+  maximumDate?: string;
+  textColor?: string;
+  title?: string;
+  mode?: DateMode;
+  placeholder?: string;
 }
 
-const DateSelecte = (props: Props) => {
-  const {
-    onChange,
-    onCancel,
-    visible,
-    mode = 'date',
-    title = '请选择时间',
-    defaultDate,
-    minimumDate,
-    maximumDate,
-    rangeDate,
-    rangeActiveColor,
-    rangeActiveBg,
-  } = props;
-  const getDate = (date?: string) => {
-    if (!date || isNaN(Date.parse(date))) {
-      return undefined;
-    }
-    return new Date(date);
-  };
-  const [date, setDate] = useState<Date>(getDate(defaultDate) || new Date());
-  const selectedDate = useRef<Date>();
-  const handleDateChange = (value: Date) => {
-    selectedDate.current = value;
-  };
-  const selcetedRangeDate = useRef<any>();
-  const handleRangeDateChange = (value: any) => {
-    selcetedRangeDate.current = value;
-  };
+const DateSelecte: FC<PropsWithChildren<Props>> = ({
+  onChange,
+  onCancel,
+  mode = 'date',
+  title = '请选择时间',
+  defaultDate,
+  minimumDate,
+  maximumDate,
+  textColor,
+  placeholder,
+  children,
+}) => {
+  const [visible, setVisible] = useState(false);
+
+  const [date, setDate] = useState<Date>(
+    isValidDate(defaultDate) || new Date(),
+  );
+  const tempSelectedDate = useRef<Date>();
+
+  const [selectedDate, setSelectedDate] = useState<string>(defaultDate || '');
+
   const handleSelectDate = () => {
-    if (mode === 'range') {
-      onChange(selcetedRangeDate.current);
-      return;
+    let newDate: any = date || dayjs();
+    tempSelectedDate.current = date;
+    let _date = '';
+    switch (mode) {
+      case 'date':
+        _date = dayjs(newDate).format('YYYY-MM-DD');
+        setSelectedDate(_date);
+        break;
+      case 'datetime':
+        _date = dayjs(newDate).format('YYYY-MM-DD HH:mm');
+        setSelectedDate(_date);
+        break;
+      case 'time':
+        _date = dayjs(newDate).format('HH:mm');
+        setSelectedDate(_date);
+        break;
     }
-    setDate(selectedDate.current as Date);
-    onChange(selectedDate.current);
+    // 传回字符串
+    // onChange(_date);
+    // 传回时间格式
+    onChange(newDate);
+    setVisible(false);
+    onCancel && onCancel();
   };
+
+  const handleDateChange = (newDate: any) => {
+    if (newDate) {
+      setDate(newDate);
+    }
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+    setDate(tempSelectedDate.current as any);
+    onCancel && onCancel();
+  };
+
+  useEffect(() => {
+    if (tempSelectedDate.current) {
+      setDate(tempSelectedDate.current);
+    }
+  }, [visible]);
+
   return (
     <>
-      <Modal visible={visible} onCancel={onCancel} position="bottom">
+      <TouchableOpacity onPress={() => setVisible(true)}>
+        {children || (
+          <View>
+            <TextInput
+              placeholder={placeholder || '请选择时间'}
+              value={selectedDate}
+              disableFocus
+              endIcon={<Icon name="calendar-outline" color="#999" size={16} />}
+            />
+          </View>
+        )}
+      </TouchableOpacity>
+      <Modal visible={visible} onCancel={handleCancel} position="bottom">
         <View
           style={[
             globalStyle.contentCenter,
@@ -70,7 +109,7 @@ const DateSelecte = (props: Props) => {
           ]}>
           <Col>
             <Row>
-              <TouchableOpacity style={styles.btn} onPress={() => onCancel()}>
+              <TouchableOpacity style={styles.btn} onPress={handleCancel}>
                 <Text style={[styles.btn_text, styles.btn_cancel]}>取消</Text>
               </TouchableOpacity>
             </Row>
@@ -83,24 +122,15 @@ const DateSelecte = (props: Props) => {
               </TouchableOpacity>
             </Row>
           </Col>
-          {mode === 'range' ? (
-            <RangeDate
-              onChange={handleRangeDateChange}
-              rangeDate={rangeDate}
-              activeColor={rangeActiveColor}
-              activeBg={rangeActiveBg}
-            />
-          ) : (
-            <DatePicker
-              date={date}
-              mode={mode}
-              locale="zh"
-              textColor="#000"
-              onDateChange={handleDateChange}
-              minimumDate={getDate(minimumDate)}
-              maximumDate={getDate(maximumDate)}
-            />
-          )}
+          <DatePicker
+            date={date || new Date()}
+            mode={mode}
+            locale="zh"
+            textColor={textColor}
+            onDateChange={handleDateChange}
+            minimumDate={isValidDate(minimumDate)}
+            maximumDate={isValidDate(maximumDate)}
+          />
         </View>
       </Modal>
     </>
@@ -147,5 +177,13 @@ const styles = StyleSheet.create({
   },
   btn_submit: {
     color: PRIMARY_COLOR,
+  },
+  mask: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(255,255,255,0)',
   },
 });

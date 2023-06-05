@@ -35,9 +35,14 @@ const RootNavigator = (props: any) => {
   );
 };
 
-const Navigation = (props: any) => {
+interface Props {
+  defaultPage: keyof RootStackParamList;
+  colorScheme?: 'dark' | 'light';
+}
+
+const Navigation = (props: Props) => {
   const stroe = useStore('rootStore');
-  getBarHeight().then((res: any) => {
+  getBarHeight().then((res: number) => {
     stroe.setBarHeight(res);
   });
   return (
